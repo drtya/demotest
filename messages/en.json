@@ -1,0 +1,18 @@
+{
+  "Auth": {
+    "slogan": "Digital solutions for the vehicle trade",
+    "title": "Demo Dashboard",
+    "email": "Email address",
+    "password": "Password",
+    "welcome": "Hi there! Nice to see you again.",
+    "forgotPassword": "Forgot Password?",
+    "signin": "Sign in",
+    "support": "Contact support"
+  },
+  "Navbar":{
+    "logo":"Demo Test",
+    "profile":"Profile",
+    "vehicles":"Vehicles",
+    "setting":"Setting"
+  }
+}

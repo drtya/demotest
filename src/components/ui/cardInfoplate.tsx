@@ -1,0 +1,1 @@
+// три таблички - full unfull position

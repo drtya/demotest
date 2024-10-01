@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../../assets/fonts/dm_sans/DMSans-Bold.ttf');
+  }
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('../../assets/fonts/dm_sans/DMSans-Light.ttf');
+  }
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../../assets/fonts/dm_sans/DMSans-Medium.ttf');
+  }
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../../assets/fonts/dm_sans/DMSans-Regular.ttf');
+  }
+}
+
+
+@layer base {
+  :root {
+    --background: 255, 255, 255;
+    --gradient: linear-gradient(-135deg, rgb(217, 14, 50), rgb(29, 71, 120));
+    --card: 243, 246, 248;
+    --menubar: 40, 40, 40;
+    --primary: 217, 14, 50;
+    --input-line: 228, 228, 228;
+    --pink: 232, 110, 132;
+    --black-foreground: 41, 49, 72;
+    --white-foreground: 255, 255, 255;
+  }
+
+  .dark {
+    --background: 41, 49, 72;
+    --gradient: linear-gradient(-135deg, #d90e32, #1d4778);
+    --card: 243, 246, 248, 0.31;
+    --menubar: 40, 40, 40, 0.8;
+    --primary: 217, 14, 50;
+    --input-line: 228, 228, 228, 0.31;
+    --pink: 232, 110, 132;
+    --white-foreground: 41, 49, 72;
+    --black-foreground: 255, 255, 255;
+  }
+}
