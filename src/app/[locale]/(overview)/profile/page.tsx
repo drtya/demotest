@@ -1,14 +1,8 @@
-import PageLayout from '@/components/layout/pageLayout';
 import ProfilePage from '@/components/pages/profile';
-import React from 'react';
 
-type Props = {};
-
-const Page = (props: Props) => {
+const Page = () => {
   return (
-    <PageLayout>
       <ProfilePage />
-    </PageLayout>
   );
 };
 

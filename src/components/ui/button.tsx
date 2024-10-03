@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -7,7 +7,7 @@ export interface ButtonProps
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, ...props }, ref) => {
-    const variantStyle = (variant: string | undefined) => {
+    const variantStyle = useMemo(() => {
       switch (variant) {
         case 'primary':
           return 'bg-primary text-white hover:bg-primary-80';
@@ -16,12 +16,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         default:
           return 'border hover:bg-black-10';
       }
-    };
+    }, [variant]);
     return (
       <button
-        className={`p-button uppercase rounded-button outline-none text-size14 duration-300 ${variantStyle(
-          variant
-        )}`}
+        className={`p-button uppercase rounded-button outline-none text-size14 duration-300 ${variantStyle}`}
         ref={ref}
         {...props}
       />

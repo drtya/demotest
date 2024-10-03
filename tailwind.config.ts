@@ -17,25 +17,28 @@ const config: Config = {
         desktop: '1280px',
       },
       colors: {
-        background: 'rgb(var(--background))',
+        background: 'rgba(var(--background))',
+        green: 'rgba(var(--green))',
+        greenLight: 'rgba(var(--green-light))',
         pink: {
-          DEFAULT: 'rgb(var(--pink))',
+          DEFAULT: 'rgba(var(--pink))',
           80: 'rgba(var(--pink), 0.80)',
           60: 'rgba(var(--pink), 0.60)',
           40: 'rgba(var(--pink), 0.40)',
           20: 'rgba(var(--pink), 0.20)',
         },
-        card: 'rgb(var(--card))',
+        card: 'rgba(var(--card))',
+        grayLight: 'rgba(var(--gray-light))',
         menuColor: 'rgb(var(--menubar))',
         primary: {
-          DEFAULT: 'rgb(var(--primary))',
+          DEFAULT: 'rgba(var(--primary))',
           80: 'rgba(var(--primary),0.80)',
           60: 'rgba(var(--primary),0.60)',
           40: 'rgba(var(--primary),0.40)',
           20: 'rgba(var(--primary),0.20)',
         },
         white: {
-          DEFAULT: 'rgb(var(--white-foreground))',
+          DEFAULT: 'rgba(var(--white-foreground))',
           80: 'rgba(var(--white-foreground),0.80)',
           60: 'rgba(var(--white-foreground),0.60)',
           45: 'rgba(var(--white-foreground),0.45)',
@@ -43,7 +46,7 @@ const config: Config = {
           10: 'rgba(var(--white-foreground),0.10)',
         },
         black: {
-          DEFAULT: 'var(--black-foreground)',
+          DEFAULT: 'rgba(var(--black-foreground))',
           80: 'rgba(var(--black-foreground),0.80)',
           60: 'rgba(var(--black-foreground),0.60)',
           45: 'rgba(var(--black-foreground),0.45)',
@@ -55,6 +58,8 @@ const config: Config = {
         gradient: 'var(--gradient)',
       },
       textColor: {
+        green: 'rgba(var(--green))',
+        greenLight: 'rgba(var(--green-light))',
         pink: {
           DEFAULT: 'rgb(var(--pink))',
           60: 'rgba(var(--pink), 60)',
@@ -81,7 +86,7 @@ const config: Config = {
         input: '12px 16px',
         mainLayout: '36px 32px 45px',
         menuList: '12px 30px',
-        headerAuth:'30px',
+        headerAuth: '30px',
       },
       borderRadius: {
         button: '10px',
@@ -108,6 +113,7 @@ const config: Config = {
         },
         '.w-register-form': generateStyle('width', 270, 384),
         '.w-navbar': generateStyle('width', 180, 256),
+        '.w-custom200': generateStyle('width', 90, 200),
         '.text-size32': generateStyle('fontSize', 20, 32),
         '.text-size20': generateStyle('fontSize', 16, 20),
         '.text-size16': generateStyle('fontSize', 13, 16),

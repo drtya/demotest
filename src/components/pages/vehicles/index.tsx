@@ -4,7 +4,6 @@ import React from 'react'
 type Props = {}
 
 const VehiclesPage = (props: Props) => {
-    console.log('VehiclesPage');
     
   return (
     <div>VehiclesPage</div>

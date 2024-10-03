@@ -33,7 +33,6 @@
   }
 }
 
-
 @layer base {
   :root {
     --background: 255, 255, 255;
@@ -45,9 +44,15 @@
     --pink: 232, 110, 132;
     --black-foreground: 41, 49, 72;
     --white-foreground: 255, 255, 255;
+    --gray-light: 237, 237, 237;
+    --green: 127, 199, 94;
+    --green-light: 228, 245, 221;
   }
 
   .dark {
+    --green: 127, 199, 94, 0.4;
+    --green-light: 228, 245, 221, 0.4;
+    --gray-light: 243, 246, 248, 0.2;
     --background: 41, 49, 72;
     --gradient: linear-gradient(-135deg, #d90e32, #1d4778);
     --card: 243, 246, 248, 0.31;
