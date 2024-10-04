@@ -1,8 +1,8 @@
-import LoginPage from "@/components/pages/login"
+import AuthPage from "@/components/pages/auth"
 
 const Page = () => {
   return (
-    <LoginPage/>
+    <AuthPage/>
   )
 }
 

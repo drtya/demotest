@@ -12,6 +12,8 @@ datasource db {
 
 model User {
   uuid     String @id @default(cuid())
+  login    String @unique
+  email    String @unique
   fullName String
   password String
   photo    String
@@ -19,13 +21,13 @@ model User {
 
 model Vehicles {
   uuid        String   @id @default(cuid())
+  slug        String   @unique
   vin         String
   make        String
   model       String
   bodyType    String
   fuelType    String
-  horsepower  Int
-  smm         String
+  horsePower  Int
   description String
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())

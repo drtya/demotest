@@ -4,15 +4,20 @@
     "title": "Demo Dashboard",
     "email": "Email address",
     "password": "Password",
+    "login": "Login",
+    "Name": "Name",
     "welcome": "Hi there! Nice to see you again.",
     "forgotPassword": "Forgot Password?",
     "signin": "Sign in",
+    "signup": "Sign up",
+    "haveAcc": "Have an account?",
+    "noAcc": "Don't have account?",
     "support": "Contact support"
   },
-  "Navbar":{
-    "logo":"Demo Test",
-    "profile":"Profile",
-    "vehicles":"Vehicles",
-    "setting":"Setting"
+  "Navbar": {
+    "logo": "Demo Test",
+    "profile": "Profile",
+    "vehicles": "Vehicles",
+    "setting": "Setting"
   }
 }

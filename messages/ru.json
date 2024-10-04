@@ -4,15 +4,20 @@
     "title": "Demo Dashboard",
     "email": "Почтовый адресс",
     "password": "Пароль",
+    "login": "Логин",
+    "Name": "Имя",
     "welcome": "С возвращением! Рады снова вас видеть.",
     "forgotPassword": "Забыли пароль?",
     "signin": "Войти",
+    "signup": "Зарегистрироваться",
+    "haveAcc": "У вас есть аккаунт?",
+    "noAcc": "У вас нет аккаунта?",
     "support": "Служба поддержки"
   },
-  "Navbar":{
-    "logo":"Demo Test",
-    "profile":"Профиль",
-    "vehicles":"Автомобили",
-    "setting":"Настройки"
+  "Navbar": {
+    "logo": "Demo Test",
+    "profile": "Профиль",
+    "vehicles": "Автомобили",
+    "setting": "Настройки"
   }
 }

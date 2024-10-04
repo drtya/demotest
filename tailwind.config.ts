@@ -1,4 +1,8 @@
-import { generateSpace, generateStyle } from './src/lib/utils/tailwind';
+import {
+  generateIndent,
+  generateSpace,
+  generateStyle,
+} from './src/lib/utils/tailwind';
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
@@ -111,7 +115,13 @@ const config: Config = {
           background:
             "url('../../assets/images/menuBg.png') center bottom/cover no-repeat",
         },
-        '.w-register-form': generateStyle('width', 270, 384),
+        '.w-login-form': generateStyle('width', 270, 384),
+        '.padding-input': generateIndent(
+          'padding',
+          { top: 5, bottom: 5, left: 9, right: 9 },
+          { top: 12, bottom: 12, left: 16, right: 16 }
+        ),
+        '.w-register-form': generateStyle('width', 320, 450),
         '.w-navbar': generateStyle('width', 180, 256),
         '.w-custom200': generateStyle('width', 90, 200),
         '.text-size32': generateStyle('fontSize', 20, 32),
