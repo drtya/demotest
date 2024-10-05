@@ -1,8 +1,8 @@
 'use client';
 import { PencilIcon } from '@heroicons/react/24/outline';
-import React, { HTMLAttributes, useState } from 'react';
+import React, { useState } from 'react';
 import { HeaderDescription, HeaderTitle, IEditableHeadingProps } from '..';
-import { Input, InputUnBorder } from '@/components/ui/input';
+import { InputUnBorder } from '@/components/ui/input';
 import { CheckIcon } from '@heroicons/react/24/solid';
 
 const EditableHeaderTitle = React.forwardRef<

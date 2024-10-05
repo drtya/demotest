@@ -8,28 +8,28 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url('../../assets/fonts/dm_sans/DMSans-Bold.ttf');
+    src: url('../assets/fonts/dm_sans/DMSans-Bold.ttf');
   }
   @font-face {
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url('../../assets/fonts/dm_sans/DMSans-Light.ttf');
+    src: url('../assets/fonts/dm_sans/DMSans-Light.ttf');
   }
   @font-face {
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url('../../assets/fonts/dm_sans/DMSans-Medium.ttf');
+    src: url('../assets/fonts/dm_sans/DMSans-Medium.ttf');
   }
   @font-face {
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('../../assets/fonts/dm_sans/DMSans-Regular.ttf');
+    src: url('../assets/fonts/dm_sans/DMSans-Regular.ttf');
   }
 }
 
@@ -48,6 +48,7 @@
     --green: 127, 199, 94;
     --green-light: 228, 245, 221;
   }
+}
 
   .dark {
     --green: 127, 199, 94, 0.4;
@@ -63,4 +64,3 @@
     --white-foreground: 41, 49, 72;
     --black-foreground: 255, 255, 255;
   }
-}

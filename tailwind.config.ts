@@ -8,7 +8,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
-  darkMode: ['class'],
+  darkMode: 'class',
   content: [
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -75,7 +75,7 @@ const config: Config = {
           45: 'rgba(var(--white-foreground),0.45)',
         },
         black: {
-          DEFAULT: 'var(--black-foreground)',
+          DEFAULT: 'rgb(var(--black-foreground))',
           80: 'rgba(var(--black-foreground),0.80)',
           60: 'rgba(var(--black-foreground),0.60)',
           45: 'rgba(var(--black-foreground),0.45)',
@@ -113,7 +113,7 @@ const config: Config = {
         },
         '.menuImage': {
           background:
-            "url('../../assets/images/menuBg.png') center bottom/cover no-repeat",
+            "url('../assets/images/menuBg.png') center bottom/cover no-repeat",
         },
         '.w-login-form': generateStyle('width', 270, 384),
         '.padding-input': generateIndent(

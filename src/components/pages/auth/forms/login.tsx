@@ -1,25 +1,30 @@
-'use client';
-import FormField from '@/components/shared/field/field';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'next-intl';
+import FormField from '@/components/ui/field';
 import Link from 'next/link';
-import { useRouter } from '@/i18n/config';
+import { signIn } from '@/lib/actions/auth';
+import { useTranslations } from 'next-intl';
 
 const LoginForm = () => {
   const t = useTranslations('Auth');
-  const { replace } = useRouter();
-  const signinHandler = (e:any) => {
-    e.preventDefault()
-    replace('/profile');
+
+  const signinHandler = async (formData: FormData) => {
+    'use server';
+    await signIn(formData);
   };
+
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <h2 className="text-size32 mb-custom16">{t('title')}</h2>
       <h2 className="text-size20 mb-custom40">{t('welcome')}</h2>
-      <form className="space-y-custom32">
+      <form action={signinHandler} className="space-y-custom32">
         <div>
-          <FormField fieldName={t('email')} placeholder="name@domain.com" />
           <FormField
+            name="email"
+            fieldName={t('email')}
+            placeholder="name@domain.com"
+          />
+          <FormField
+            name="password"
             fieldName={t('password')}
             placeholder="******"
             type="password"
@@ -29,10 +34,12 @@ const LoginForm = () => {
           {t('forgotPassword')}
         </Link>
         <div className="flex flex-col gap-custom24">
-          <Button variant="primary" onClick={signinHandler}>
+          <Button type="submit" variant="primary">
             {t('signin')}
           </Button>
-          <Button variant="secondary">{t('support')}</Button>
+          <Button type="button" variant="secondary">
+            {t('support')}
+          </Button>
         </div>
       </form>
     </div>

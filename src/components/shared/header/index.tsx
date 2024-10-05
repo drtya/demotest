@@ -1,8 +1,10 @@
 import React from 'react';
 import LocaleSwitch from '../locale/localeSwitch';
 import Image from 'next/image';
-import BackPageButton from './button/back';
-import { Link } from '@/i18n/config';
+import BackPageButton from './ui/backButton';
+import Link from 'next/link';
+import LogoutButton from './ui/logoutButton';
+import HeaderProfile from './ui/headerProfile';
 
 export interface IEditableHeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -17,13 +19,7 @@ const Header = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
       {...props}
     >
       {children}
-      <div className="flex items-center gap-custom32">
-        <div className="flex items-center gap-custom10">
-          <Image src={'/profilePhoto.png'} width={50} height={50} alt="photo" />
-          <p className="font-medium text-size15">John Doe</p>
-        </div>
-        <LocaleSwitch />
-      </div>
+      <HeaderProfile/>
     </header>
   )
 );

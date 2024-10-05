@@ -1,8 +1,9 @@
 'use client';
-import { usePathname } from '@/i18n/config';
+import { Locale } from '@/i18n/config';
+import { setUserLocale } from '@/lib/utils/locale';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import * as Select from '@radix-ui/react-select';
-import { useRouter } from 'next/navigation';
+import { startTransition, useCallback } from 'react';
 
 type Props = {
   defaultValue: string;
@@ -15,13 +16,12 @@ export default function LocaleSwitcherSelect({
   items,
   label,
 }: Props) {
-  const { replace } = useRouter();
-  const path = usePathname()
-  const onChange = (value: string) => {
-    if (defaultValue !== value) {
-      replace(`/${value}${path}`);
-    }
-  };
+  const onChange = useCallback((value: string) => {
+    const locale = value as Locale;
+    startTransition(() => {
+      setUserLocale(locale);
+    });
+  }, []);
 
   return (
     <div className="relative">
@@ -49,7 +49,7 @@ export default function LocaleSwitcherSelect({
                 >
                   <div className="mr-2 w-[1rem]">
                     {item.value === defaultValue && (
-                      <CheckIcon className="h-5 w-5 text-slate-600" />
+                      <CheckIcon className="h-5 w-5 text-black-60 " />
                     )}
                   </div>
                   <span className="text-slate-900">{item.label}</span>

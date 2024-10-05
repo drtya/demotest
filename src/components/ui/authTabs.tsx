@@ -8,10 +8,7 @@ interface IAuthTabsProps extends HTMLAttributes<HTMLDivElement> {
   defaultValue?: 'login' | 'register';
 }
 const AuthTabs = forwardRef<HTMLDivElement, IAuthTabsProps>(
-  (
-    { defaultValue, registerForm, loginForm, className, ...props },
-    ref
-  ) => {
+  ({ defaultValue, registerForm, loginForm, className, ...props }, ref) => {
     const t = useTranslations('Auth');
     const [currentTab, setCurrentTab] = useState(defaultValue || 'login');
     const toggleForm = () => {
@@ -24,8 +21,11 @@ const AuthTabs = forwardRef<HTMLDivElement, IAuthTabsProps>(
         ref={ref}
       >
         <div className="w-login-form">{loginForm}</div>
-        <p className="text-size16 text-black-80">
-          {t('noAcc')} <button className='text-blue-600' onClick={toggleForm}>{t('signup')}</button>
+        <p className="text-size16 flex items-center text-black-80 gap-custom10">
+          {t('noAcc')}
+          <button className="text-blue-600" onClick={toggleForm}>
+            {t('signup')}
+          </button>
         </p>
       </div>
     ) : (
@@ -35,8 +35,11 @@ const AuthTabs = forwardRef<HTMLDivElement, IAuthTabsProps>(
         ref={ref}
       >
         <div className="w-register-form">{registerForm}</div>
-        <p className="text-size16 text-black-80">
-          {t('haveAcc')} <button className='text-blue-600' onClick={toggleForm}>{t('signin')}</button>
+        <p className="text-size16 flex items-center text-black-80 gap-custom10">
+          {t('haveAcc')}
+          <button className="text-blue-600" onClick={toggleForm}>
+            {t('signin')}
+          </button>
         </p>
       </div>
     );

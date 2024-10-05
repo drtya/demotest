@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import car from '@/assets/images/auth/car.png';
 import LoginForm from './forms/login';
-import AuthTabs from '@/components/shared/auth';
+import AuthTabs from '@/components/ui/authTabs';
 import RegisterForm from './forms/register';
 
 const AuthPage = () => {

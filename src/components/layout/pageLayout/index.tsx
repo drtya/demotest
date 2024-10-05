@@ -1,15 +1,15 @@
 'use client';
 import React, { useMemo } from 'react';
-import { usePathname } from '@/i18n/config';
+import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Header, HeaderBack, HeaderTitle } from '@/components/shared/header';
 import { CardInfo } from '@/components/ui/cardInfoplate';
-import { useRouter } from 'next/router';
 import { useParams } from 'next/navigation';
 import {
   EditableHeaderDescription,
   EditableHeaderTitle,
-} from '@/components/shared/header/button/editableHeader';
+} from '@/components/shared/header/ui/editableHeader';
+import { getCookie } from 'cookies-next';
 
 type Props = {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ const PageLayout = React.memo(({ children }: Props) => {
   const t = useTranslations('Navbar');
   const pathname = usePathname();
   const { autoUUID } = useParams<{ autoUUID: string }>();
-
+  
   const getPageTitle: JSX.Element | null = useMemo(() => {
     switch (pathname) {
       case '/profile':

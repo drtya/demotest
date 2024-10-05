@@ -1,5 +1,7 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
-export default function RootPage() {
-  redirect('/en/auth')
+export default function Home() {
+  return (
+    redirect('/auth')
+  );
 }

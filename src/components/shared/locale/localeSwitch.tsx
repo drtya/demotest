@@ -8,8 +8,6 @@ import { memo } from 'react';
 
 export default memo(function LocaleSwitch() {
   const locale = useLocale();
-  console.log('render locale component');
-
   return (
     <LocaleSwitcherSelect
       defaultValue={locale}

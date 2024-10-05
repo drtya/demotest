@@ -5,14 +5,15 @@
     "email": "Email address",
     "password": "Password",
     "login": "Login",
-    "Name": "Name",
+    "name": "Name",
     "welcome": "Hi there! Nice to see you again.",
     "forgotPassword": "Forgot Password?",
     "signin": "Sign in",
     "signup": "Sign up",
     "haveAcc": "Have an account?",
     "noAcc": "Don't have account?",
-    "support": "Contact support"
+    "support": "Contact support",
+    "logout":"Logout"    
   },
   "Navbar": {
     "logo": "Demo Test",

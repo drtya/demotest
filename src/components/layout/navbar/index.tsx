@@ -1,12 +1,6 @@
 'use client';
-import { useState } from 'react';
-import {
-  Cog6ToothIcon,
-  CubeIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/solid';
 import { useTranslations } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/config';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface IMenuLink {
   href: string;
@@ -14,25 +8,8 @@ interface IMenuLink {
   title: string;
 }
 
-const Navbar = () => {
+const Navbar = ({navLinks}:{navLinks:IMenuLink[]}) => {
   const t = useTranslations('Navbar');
-  const [navLinks] = useState([
-    {
-      href: '/profile',
-      icon: <UserCircleIcon />,
-      title: t('profile'),
-    },
-    {
-      href: '/vehicles',
-      icon: <CubeIcon />,
-      title: t('vehicles'),
-    },
-    {
-      href: '/setting',
-      icon: <Cog6ToothIcon />,
-      title: t('setting'),
-    },
-  ]);
   const { replace } = useRouter();
   const pathname = usePathname();
   const replaceHandler = (li: IMenuLink) => {
@@ -46,7 +23,7 @@ const Navbar = () => {
       <h3 className="text-white text-center mb-custom80 -ml-10">{t('logo')}</h3>
       <nav>
         <ol className="space-y-custom10">
-          {navLinks.map((li, idx) => (
+          {navLinks.map((li) => (
             <li key={`navbar_${li.title}`}>
               <button
                 className={`w-full relative before:absolute before:h-full before:t-0 before:left-0 text-start p-menuList text-size16 border-primary before:duration-300 duration-300 font-medium flex items-center gap-custom20 ${

@@ -1,11 +1,29 @@
-import createMiddleware from 'next-intl/middleware';
-import { routing } from './i18n/config';
+import { NextRequest, NextResponse } from 'next/server';
+import { verifyToken } from './lib/utils/jwt';
 
-export default createMiddleware(routing);
+export async function middleware(req: NextRequest) {
+  const token = req.cookies.get('token')?.value;
+  const AuthPage = req.nextUrl.pathname === '/auth';
+
+  if (!token && !AuthPage) {
+    return NextResponse.redirect(new URL(`/auth`, req.url));
+  }
+
+  try {
+    if (token) {
+      const decoded = await verifyToken(token);
+      if (AuthPage && decoded) {
+        return NextResponse.redirect(new URL(`/profile`, req.url));
+      }
+      return ;
+    }
+  } catch (error) {
+    if (!AuthPage) {
+      return NextResponse.redirect(new URL(`/auth`, req.url));
+    }
+  }
+}
 
 export const config = {
-  matcher: [
-    '/',
-    '/(ru|en)/:path*',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 };
