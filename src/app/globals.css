@@ -51,16 +51,16 @@
 }
 
   .dark {
-    --green: 127, 199, 94, 0.4;
-    --green-light: 228, 245, 221, 0.4;
-    --gray-light: 243, 246, 248, 0.2;
-    --background: 41, 49, 72;
+    --green: 127, 199, 94;
+    --green-light: 228, 245, 221;
+    --gray-light: 243, 246, 248;
+    --background: 40, 40, 40,0.8;
     --gradient: linear-gradient(-135deg, #d90e32, #1d4778);
-    --card: 243, 246, 248, 0.31;
-    --menubar: 40, 40, 40, 0.8;
+    --card: 243, 246, 248;
+    --menubar: 40, 40, 40;
     --primary: 217, 14, 50;
-    --input-line: 228, 228, 228, 0.31;
+    --input-line: 228, 228, 228;
     --pink: 232, 110, 132;
-    --white-foreground: 41, 49, 72;
+    --white-foreground: 255, 255, 255;
     --black-foreground: 255, 255, 255;
   }

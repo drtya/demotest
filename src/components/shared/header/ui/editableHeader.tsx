@@ -8,7 +8,7 @@ import { CheckIcon } from '@heroicons/react/24/solid';
 const EditableHeaderTitle = React.forwardRef<
   HTMLHeadingElement,
   IEditableHeadingProps
->(({ text, ...props }) => {
+>(({ text, ...props },ref) => {
   const [editText, setText] = useState(text);
   const [editable, setEditable] = useState(false);
   const clickOnEdit = () => {
@@ -33,7 +33,7 @@ const EditableHeaderTitle = React.forwardRef<
     </div>
   ) : (
     <div className="flex items-center justify-between gap-custom16">
-      <HeaderTitle text={editText} {...props} />
+      <HeaderTitle text={editText} {...props} ref={ref}/>
       <button className="menuIconSize" onClick={clickOnEdit}>
         <PencilIcon />
       </button>
@@ -43,7 +43,7 @@ const EditableHeaderTitle = React.forwardRef<
 const EditableHeaderDescription = React.forwardRef<
   HTMLHeadingElement,
   IEditableHeadingProps
->(({ text, ...props }) => {
+>(({ text, ...props },ref) => {
   const [editText, setText] = useState(text);
   const [editable, setEditable] = useState(false);
   const clickOnEdit = () => {
@@ -68,7 +68,7 @@ const EditableHeaderDescription = React.forwardRef<
     </div>
   ) : (
     <div className="flex items-center justify-between gap-custom16">
-      <HeaderDescription text={editText} {...props} />
+      <HeaderDescription text={editText} {...props} ref={ref}/>
       <button className="menuIconSize" onClick={clickOnEdit}>
         <PencilIcon />
       </button>

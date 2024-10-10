@@ -15,7 +15,6 @@ export async function middleware(req: NextRequest) {
       if (AuthPage && decoded) {
         return NextResponse.redirect(new URL(`/profile`, req.url));
       }
-      return ;
     }
   } catch (error) {
     if (!AuthPage) {

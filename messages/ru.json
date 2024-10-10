@@ -2,10 +2,6 @@
   "Auth": {
     "slogan": "Цифровые решения для торговли транспортными средствами",
     "title": "Demo Dashboard",
-    "email": "Почтовый адресс",
-    "password": "Пароль",
-    "login": "Логин",
-    "name": "Имя",
     "welcome": "С возвращением! Рады снова вас видеть.",
     "forgotPassword": "Забыли пароль?",
     "signin": "Войти",
@@ -13,12 +9,31 @@
     "haveAcc": "У вас есть аккаунт?",
     "noAcc": "У вас нет аккаунта?",
     "support": "Служба поддержки",
-    "logout":"Выйти"
+    "logout": "Выйти"
+  },
+  "Actions":{
+    "cancel":"Отмена",
+    "saveChange":"Сохранить изменения"
+  },
+  "ProfileInputs": {
+    "changePassword":"Сменить пароль",
+    "oldPassword":"Старый пароль",
+    "newPassword":"Новый пароль",
+    "replayPassword":"Повторите новый пароль",
+    "name": "Имя",
+    "email": "Почтовый адресс",
+    "phone": "Номер телефона",
+    "password": "Пароль",
+    "emailDescription": "Это ваш логин"
   },
   "Navbar": {
     "logo": "Demo Test",
     "profile": "Профиль",
     "vehicles": "Автомобили",
     "setting": "Настройки"
+  },
+  "Profile": {
+    "profile": "Профиль",
+    "staff": "Персонал"
   }
 }

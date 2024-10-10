@@ -90,7 +90,7 @@ const config: Config = {
         input: '12px 16px',
         mainLayout: '36px 32px 45px',
         menuList: '12px 30px',
-        headerAuth: '30px',
+        headerAuth: '30px 30px 0 30px',
       },
       borderRadius: {
         button: '10px',
@@ -115,12 +115,12 @@ const config: Config = {
           background:
             "url('../assets/images/menuBg.png') center bottom/cover no-repeat",
         },
-        '.w-login-form': generateStyle('width', 270, 384),
         '.padding-input': generateIndent(
           'padding',
           { top: 5, bottom: 5, left: 9, right: 9 },
           { top: 12, bottom: 12, left: 16, right: 16 }
         ),
+        '.w-form-384': generateStyle('width', 270, 384),
         '.w-register-form': generateStyle('width', 320, 450),
         '.w-navbar': generateStyle('width', 180, 256),
         '.w-custom200': generateStyle('width', 90, 200),
@@ -151,6 +151,7 @@ const config: Config = {
         ...generateSpace('.gap-custom', 'gap'),
         ...generateSpace('.pt-custom', 'paddingTop'),
         ...generateSpace('.pb-custom', 'paddingBottom'),
+        ...generateSpace('.p-custom', 'padding'),
       });
     }),
   ],

@@ -27,7 +27,7 @@ const Navbar = ({navLinks}:{navLinks:IMenuLink[]}) => {
             <li key={`navbar_${li.title}`}>
               <button
                 className={`w-full relative before:absolute before:h-full before:t-0 before:left-0 text-start p-menuList text-size16 border-primary before:duration-300 duration-300 font-medium flex items-center gap-custom20 ${
-                  pathname === li.href
+                  pathname.startsWith(li.href)
                     ? 'before:bg-white-20 before:w-full text-white border-l cursor-default'
                     : 'text-white-45 before:w-0 border-none'
                 }`}

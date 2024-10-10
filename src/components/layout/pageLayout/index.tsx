@@ -9,56 +9,84 @@ import {
   EditableHeaderDescription,
   EditableHeaderTitle,
 } from '@/components/shared/header/ui/editableHeader';
-import { getCookie } from 'cookies-next';
+import { HeaderNavbar } from '@/components/shared/header/ui/headerNavigation';
 
 type Props = {
   children: React.ReactNode;
 };
 
 const PageLayout = React.memo(({ children }: Props) => {
-  const t = useTranslations('Navbar');
+  const MNav = useTranslations('Navbar');
+  const MProfile = useTranslations('Profile');
   const pathname = usePathname();
   const { autoUUID } = useParams<{ autoUUID: string }>();
-  
-  const getPageTitle: JSX.Element | null = useMemo(() => {
-    switch (pathname) {
-      case '/profile':
-        return <HeaderTitle text={t('profile')} />;
-      case '/setting':
-        return <HeaderTitle text={t('setting')} />;
-      case '/vehicles':
-        return (
-          <div className="flex items-center gap-custom16">
-            <HeaderTitle text={t('vehicles')} />
-            <CardInfo variant="amount" amount={211}>
-              211
-            </CardInfo>
-          </div>
-        );
-      case '/vehicles/new':
-        return (
+
+  const getPageTitle: JSX.Element = useMemo(() => {
+    if (pathname.startsWith('/profile')) {
+      return (
+        <Header
+          nav={
+            <HeaderNavbar
+              items={[
+                {
+                  linkName: MProfile('profile'),
+                  path: '/profile',
+                },
+                {
+                  linkName: MProfile('staff'),
+                  path: '/profile/staff',
+                },
+              ]}
+            />
+          }
+        >
+          <HeaderTitle text={MNav('profile')} />
+        </Header>
+      );
+    } else if (pathname.startsWith('/setting')) {
+      return (
+        <Header>
+          <HeaderTitle text={MNav('setting')} />
+        </Header>
+      );
+    } else if (pathname.startsWith('/vehicles/new')) {
+      return (
+        <Header>
           <div className="flex items-center gap-custom16">
             <HeaderBack />
-            <HeaderTitle text={t('vehicles')} />
+            <HeaderTitle text={MNav('vehicles')} />
           </div>
-        );
-      case `/vehicles/${autoUUID}`:
-        return (
+        </Header>
+      );
+    } else if (pathname.startsWith(`/vehicles/${autoUUID}`)) {
+      return (
+        <Header>
           <div className="flex items-center gap-custom16">
             <HeaderBack />
-            <div className='space-y-custom10 w-custom200'>
+            <div className="space-y-custom10 w-custom200">
               <EditableHeaderTitle text={autoUUID} />
               <EditableHeaderDescription text="description" />
             </div>
           </div>
-        );
-      default:
-        return null;
+        </Header>
+      );
+    } else if (pathname.startsWith('/vehicles')) {
+      return (
+        <Header>
+          <div className="flex items-center gap-custom16">
+            <HeaderTitle text={MNav('vehicles')} />
+            <CardInfo variant="amount" amount={211}>
+              211
+            </CardInfo>
+          </div>
+        </Header>
+      );
     }
+    else return <Header/>
   }, [pathname]);
   return (
     <div className="flex-1 flex flex-col">
-      <Header>{getPageTitle}</Header>
+      {getPageTitle}
       <div className="p-mainLayout flex-1">{children}</div>
     </div>
   );

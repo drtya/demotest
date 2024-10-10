@@ -12,7 +12,7 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale}>
-      <body>
+      <body className='bg-background'>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

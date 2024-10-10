@@ -2,9 +2,9 @@ import UnAuthHeader from '@/components/layout/unAuthHeader';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import car from '@/assets/images/auth/car.png';
-import LoginForm from './forms/login';
+import LoginForm from './ui/forms/login';
 import AuthTabs from '@/components/ui/authTabs';
-import RegisterForm from './forms/register';
+import RegisterForm from './ui/forms/register';
 
 const AuthPage = () => {
   const t = useTranslations('Auth');

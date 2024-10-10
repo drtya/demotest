@@ -1,25 +1,23 @@
 import React from 'react';
-import LocaleSwitch from '../locale/localeSwitch';
-import Image from 'next/image';
 import BackPageButton from './ui/backButton';
-import Link from 'next/link';
-import LogoutButton from './ui/logoutButton';
 import HeaderProfile from './ui/headerProfile';
 
 export interface IEditableHeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
   text?: string;
 }
+export interface IHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  nav?: JSX.Element;
+}
 
-const Header = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
-  ({ className, children, ...props }, ref) => (
-    <header
-      className="p-headerAuth flex items-center justify-between z-50"
-      ref={ref}
-      {...props}
-    >
-      {children}
-      <HeaderProfile/>
+const Header = React.forwardRef<HTMLElement, IHeaderProps>(
+  ({ className, nav, children, ...props }, ref) => (
+    <header className="p-headerAuth w-full z-50" >
+      <div className="flex items-center justify-between">
+        {children}
+        <HeaderProfile />
+      </div>
+      <div className='border-b mt-custom24' ref={ref} {...props}>{nav}</div>
     </header>
   )
 );
@@ -41,32 +39,10 @@ const HeaderDescription = React.forwardRef<
   </h2>
 ));
 
-export interface IHeaderNavbarList {
-  linkName: string;
-  path: string;
-}
-
-export interface HeaderNavbarProps extends React.HTMLAttributes<HTMLElement> {
-  items: IHeaderNavbarList[];
-}
-
-const HeaderNavbar = React.forwardRef<HTMLDivElement, HeaderNavbarProps>(
-  ({ className, items, ...props }, ref) => (
-    <nav
-      ref={ref}
-      className={`flex mt-custom24 items-center ${className}`}
-      {...props}
-    >
-      {items.map((li) => (
-        <Link className="pt-custom16 border-b" href={li.path}></Link>
-      ))}
-    </nav>
-  )
-);
 
 const HeaderBack = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => <BackPageButton ref={ref} {...props} />);
 
-export { Header, HeaderTitle, HeaderDescription, HeaderNavbar, HeaderBack };
+export { Header, HeaderTitle, HeaderDescription, HeaderBack };

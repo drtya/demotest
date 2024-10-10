@@ -6,7 +6,7 @@ type Props = {};
 
 const UnAuthHeader = (props: Props) => {
   return (
-    <Header>
+    <Header style={{border:'none'}}>
       <div className="text-black md:text-white duration-200">Demo Test</div>
     </Header>
   );

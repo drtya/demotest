@@ -2,10 +2,6 @@
   "Auth": {
     "slogan": "Digital solutions for the vehicle trade",
     "title": "Demo Dashboard",
-    "email": "Email address",
-    "password": "Password",
-    "login": "Login",
-    "name": "Name",
     "welcome": "Hi there! Nice to see you again.",
     "forgotPassword": "Forgot Password?",
     "signin": "Sign in",
@@ -13,12 +9,31 @@
     "haveAcc": "Have an account?",
     "noAcc": "Don't have account?",
     "support": "Contact support",
-    "logout":"Logout"    
+    "logout": "Logout"
+  },
+  "Actions": {
+    "cancel": "Cancel",
+    "saveChange": "Save change"
+  },
+  "ProfileInputs": {
+    "changePassword": "Change password",
+    "oldPassword": "Old pasword",
+    "newPassword": "New pasword",
+    "replayPassword": "Replay new pasword",
+    "name": "Name",
+    "email": "Email address",
+    "phone": "Contact phone",
+    "password": "Password",
+    "emailDescription": "This is your login"
   },
   "Navbar": {
     "logo": "Demo Test",
     "profile": "Profile",
     "vehicles": "Vehicles",
     "setting": "Setting"
+  },
+  "Profile": {
+    "profile": "Profile",
+    "staff": "Staff"
   }
 }
