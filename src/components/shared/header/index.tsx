@@ -1,6 +1,7 @@
 import React from 'react';
 import BackPageButton from './ui/backButton';
 import HeaderProfile from './ui/headerProfile';
+import BurgerButton from './ui/burgerButton';
 
 export interface IEditableHeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -8,16 +9,20 @@ export interface IEditableHeadingProps
 }
 export interface IHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   nav?: JSX.Element;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen?: boolean;
 }
 
-const Header = React.forwardRef<HTMLElement, IHeaderProps>(
+const Header = React.forwardRef<HTMLDivElement, IHeaderProps>(
   ({ className, nav, children, ...props }, ref) => (
-    <header className="p-headerAuth w-full z-50" >
+    <header className="p-headerAuth w-full z-50">
       <div className="flex items-center justify-between">
         {children}
-        <HeaderProfile />
+        <HeaderProfile className='max-sm:hidden' />
       </div>
-      <div className='border-b mt-custom24' ref={ref} {...props}>{nav}</div>
+      <div className="border-b mt-custom24" ref={ref} {...props}>
+        {nav}
+      </div>
     </header>
   )
 );
@@ -38,7 +43,6 @@ const HeaderDescription = React.forwardRef<
     {text}
   </h2>
 ));
-
 
 const HeaderBack = React.forwardRef<
   HTMLButtonElement,

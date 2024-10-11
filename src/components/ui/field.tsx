@@ -12,6 +12,7 @@ interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const FormField = forwardRef<HTMLInputElement, FieldProps>(
   (
     {
+      name,
       fieldName,
       onChange,
       required,
@@ -29,11 +30,13 @@ const FormField = forwardRef<HTMLInputElement, FieldProps>(
       const input = event.target;
       const validationMessage = input.validationMessage;
       if (validationMessage) {
-        setError(errorMessage||validationMessage);
+        setError(errorMessage || validationMessage);
       } else {
         setError('');
       }
-      onChange;
+      if (onChange) {
+        onChange(event);
+      }
     };
     return (
       <div className="flex flex-col justify-start gap-custom10">
@@ -48,6 +51,7 @@ const FormField = forwardRef<HTMLInputElement, FieldProps>(
         <Input
           required={required}
           onChange={changeHandler}
+          name={name}
           {...props}
           ref={ref}
           id={fieldName}
@@ -55,7 +59,7 @@ const FormField = forwardRef<HTMLInputElement, FieldProps>(
         {description && (
           <div className="text-size14 text-black-80">{description}</div>
         )}
-        {error ? <div className="text-size14 text-primary">{error}</div>:null}
+        {error ? <div className="text-size14 text-primary">{error}</div> : null}
       </div>
     );
   }

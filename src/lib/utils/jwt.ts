@@ -18,6 +18,7 @@ export async function verifyToken(token: string) {
       const { payload } = await jwtVerify(token, SECRET);
       return payload;
     } catch (error) {
+      console.error(error)
       throw new Error('Invalid or expired token');
     }
   }
@@ -28,6 +29,7 @@ export async function verifyToken(token: string) {
       const decoded = jwtDecode<UserJWT>(token);
       return decoded;
     } catch (error) {
+      console.error(error)
       return null;
     }
   };

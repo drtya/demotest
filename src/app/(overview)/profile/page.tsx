@@ -1,9 +1,7 @@
 import ProfilePage from '@/components/pages/profile';
 
-const Page = () => {
-  return (
-      <ProfilePage />
-  );
+const Page = async () => {
+  return <ProfilePage />;
 };
 
 export default Page;

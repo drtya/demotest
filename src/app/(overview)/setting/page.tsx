@@ -1,6 +1,6 @@
 import SettingPage from '@/components/pages/setting';
 
-const Page = () => {
+const Page = async () => {
   return (
       <SettingPage />
   );

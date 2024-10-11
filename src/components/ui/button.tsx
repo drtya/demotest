@@ -14,7 +14,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         case 'secondary':
           return 'border-secondaryButton border-pink text-pink hover:bg-pink-20';
         default:
-          return 'border hover:bg-black-10';
+          return 'border hover:bg-black-10 bg-white-60';
       }
     }, [variant]);
     return (

@@ -26,6 +26,7 @@ const HeaderNavbar = React.forwardRef<HTMLDivElement, HeaderNavbarProps>(
       >
         {items.map((li) => (
           <button
+          key={`header_navbar_${li.linkName}`}
           type='button'
             className={`translate-y-[1px] pb-3 pt-custom16 border-b ${
               li.path === pathname ? 'text-black border-primary' : ''

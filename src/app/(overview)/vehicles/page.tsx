@@ -1,9 +1,7 @@
 import VehiclesPage from '@/components/pages/vehicles';
 
-const Page = () => {
-  return (
-      <VehiclesPage />
-  );
+const Page = async () => {
+  return <VehiclesPage />;
 };
 
 export default Page;

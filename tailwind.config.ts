@@ -16,6 +16,7 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
+        mobile360: '360px',
         tablet: '768px',
         laptop: '1024px',
         desktop: '1280px',
@@ -120,7 +121,7 @@ const config: Config = {
           { top: 5, bottom: 5, left: 9, right: 9 },
           { top: 12, bottom: 12, left: 16, right: 16 }
         ),
-        '.w-form-384': generateStyle('width', 270, 384),
+        '.max-w-form-384': generateStyle('maxWidth', 270, 384),
         '.w-register-form': generateStyle('width', 320, 450),
         '.w-navbar': generateStyle('width', 180, 256),
         '.w-custom200': generateStyle('width', 90, 200),

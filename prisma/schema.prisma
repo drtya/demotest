@@ -16,6 +16,7 @@ model User {
   fullName String
   password String
   photo    String?
+  phone    String?
 }
 
 model Vehicles {

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import LocaleSwitch from '../../locale/localeSwitch';
@@ -6,18 +6,20 @@ import LogoutButton from './logoutButton';
 import { getCookie } from 'cookies-next';
 import { decodeToken } from '@/lib/utils/jwt';
 import { UserJWT } from '@/lib/types/user';
+import BurgerButton from './burgerButton';
 
-
-const HeaderProfile = () => {
+const HeaderProfile = ({ className }: { className?: string }) => {
   const [user, setUser] = useState<UserJWT | null>(null);
   const token = getCookie('token');
   useEffect(() => {
-    setUser(decodeToken(token as string))
+    setUser(decodeToken(token as string));
   }, []);
-  return (
-    <div className="flex items-center gap-custom32 text-black">
-      {user ? (
-        <div className="flex items-center gap-custom10 ">
+  return user ? (
+    <>
+      <div
+        className={`flex items-center gap-custom16 ${className}`}
+      >
+        <div className="flex items-center gap-custom10">
           <Image
             src={user.photo || '/profilePhoto.png'}
             width={50}
@@ -26,10 +28,13 @@ const HeaderProfile = () => {
           />
           <p className="font-medium text-size15">{user.fullName}</p>
         </div>
-      ) : null}
-      <LocaleSwitch />
-      {user ? <LogoutButton /> : null}
-    </div>
+        <LocaleSwitch />
+        <LogoutButton />
+      </div>
+      <BurgerButton className="sm:hidden" />
+    </>
+  ) : (
+    <LocaleSwitch />
   );
 };
 

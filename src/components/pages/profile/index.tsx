@@ -1,13 +1,11 @@
-'use client'
-import React from 'react'
-import EditProfileForm from './ui/forms/editProfile'
+'use client';
+import React from 'react';
+import EditProfileForm from './ui/forms/editProfile';
 
-type Props = {}
+type Props = {};
 
 const ProfilePage = (props: Props) => {
-  return (
-    <div><EditProfileForm/></div>
-  )
-}
+  return <EditProfileForm />;
+};
 
-export default ProfilePage
+export default ProfilePage;

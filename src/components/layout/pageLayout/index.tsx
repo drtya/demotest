@@ -10,17 +10,19 @@ import {
   EditableHeaderTitle,
 } from '@/components/shared/header/ui/editableHeader';
 import { HeaderNavbar } from '@/components/shared/header/ui/headerNavigation';
+import Navbar from '../navbar';
+import { navMenu } from '@/lib/data/nav';
 
 type Props = {
   children: React.ReactNode;
 };
+
 
 const PageLayout = React.memo(({ children }: Props) => {
   const MNav = useTranslations('Navbar');
   const MProfile = useTranslations('Profile');
   const pathname = usePathname();
   const { autoUUID } = useParams<{ autoUUID: string }>();
-
   const getPageTitle: JSX.Element = useMemo(() => {
     if (pathname.startsWith('/profile')) {
       return (
@@ -85,10 +87,14 @@ const PageLayout = React.memo(({ children }: Props) => {
     else return <Header/>
   }, [pathname]);
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex">
+      <Navbar navLinks={navMenu} />
+      <div className="flex-1 flex flex-col h-screen overflow-hidden">
       {getPageTitle}
-      <div className="p-mainLayout flex-1">{children}</div>
+      <div className="p-mainLayout flex-1 overflow-y-scroll">{children}</div>
     </div>
+    </div>
+   
   );
 });
 

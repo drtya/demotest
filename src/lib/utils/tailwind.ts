@@ -1,9 +1,10 @@
+'use server'
 const generateStyle = (
   styleName: string,
   styleMobile: number,
   styleDesctop: number
 ) => {
-  let tick = Number(((styleDesctop - styleMobile) / 3).toFixed(1));
+  const tick = Number(((styleDesctop - styleMobile) / 3).toFixed(1));
   return {
     [styleName]: `${styleMobile}px`,
     '@media (min-width: 768px)': {
@@ -28,14 +29,14 @@ const generateIndent = (
   styleMobile: IIntendSide,
   styleDesctop: IIntendSide
 ) => {
-  let tickTop = Number(((styleDesctop.top - styleMobile.top) / 3).toFixed(1));
-  let tickRight = Number(
+  const tickTop = Number(((styleDesctop.top - styleMobile.top) / 3).toFixed(1));
+  const tickRight = Number(
     ((styleDesctop.right - styleMobile.right) / 3).toFixed(1)
   );
-  let tickBottom = Number(
+  const tickBottom = Number(
     ((styleDesctop.bottom - styleMobile.bottom) / 3).toFixed(1)
   );
-  let tickLeft = Number(
+  const tickLeft = Number(
     ((styleDesctop.left - styleMobile.left) / 3).toFixed(1)
   );
   return {
@@ -97,7 +98,7 @@ const generateSpace: any = (className: string, styleName: string) => {
   ];
   const result: any = [];
   for (let i = 0; i < spaceSizes.length; i++) {
-    let name = `${className}${spaceSizes[i].max}`;
+    const name = `${className}${spaceSizes[i].max}`;
     result[name] = generateStyle(
       styleName,
       spaceSizes[i].min,

@@ -17,6 +17,7 @@ export async function middleware(req: NextRequest) {
       }
     }
   } catch (error) {
+    console.error(error)
     if (!AuthPage) {
       return NextResponse.redirect(new URL(`/auth`, req.url));
     }

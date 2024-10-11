@@ -20,7 +20,7 @@ const AuthTabs = forwardRef<HTMLDivElement, IAuthTabsProps>(
         className={`flex flex-col gap-custom20 ${className}`}
         ref={ref}
       >
-        <div className="w-form-384">{loginForm}</div>
+        <div className="max-w-form-384">{loginForm}</div>
         <p className="text-size16 flex items-center text-black-80 gap-custom10">
           {t('noAcc')}
           <button className="text-blue-600" onClick={toggleForm}>
