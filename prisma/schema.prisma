@@ -11,24 +11,27 @@ datasource db {
 }
 
 model User {
-  uuid     String @id @default(cuid())
-  email    String @unique
+  uuid     String  @id @default(cuid())
+  email    String  @unique
   fullName String
   password String
   photo    String?
   phone    String?
 }
 
-model Vehicles {
+model Vehicle {
   uuid        String   @id @default(cuid())
   slug        String   @unique
   vin         String
   make        String
   model       String
-  bodyType    String
-  fuelType    String
-  horsePower  Int
-  description String
+  bodyType    String?
+  image       String?
+  fuelType    String?
+  horsePower  Int?
+  description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
+  amount      Int?
+  maxAmount   Int?
 }

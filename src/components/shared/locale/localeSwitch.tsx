@@ -1,3 +1,4 @@
+'use client'
 import LocaleSwitcherSelect from './localeSwotchSelect';
 import { useLocale } from 'next-intl';
 import eng from '@/assets/images/lang/eng.svg';

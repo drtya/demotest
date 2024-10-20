@@ -1,7 +1,16 @@
+import SWRProvider from '@/components/layout/provider/swrProvider';
 import VehiclesPage from '@/components/pages/vehicles';
+import { getVehicles } from '@/lib/actions/vehicle';
+
 
 const Page = async () => {
-  return <VehiclesPage />;
+  const vehicles = await getVehicles();
+  
+  return (
+    <SWRProvider fallback={{'/api/vehicles':vehicles}}>
+      <VehiclesPage />
+    </SWRProvider>
+  );
 };
 
 export default Page;

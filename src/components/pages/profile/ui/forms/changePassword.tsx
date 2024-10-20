@@ -1,9 +1,9 @@
 'use client';
 import FormField from '@/components/ui/field';
 import { useTranslations } from 'next-intl';
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, memo } from 'react';
 
-const ChangePasswordForm = () => {
+const ChangePasswordForm = memo(() => {
   const MInputs = useTranslations('ProfileInputs');
   const validateReplayPassword: ChangeEventHandler<HTMLInputElement> = (e) => {
     const form = e.target.closest('form');
@@ -37,7 +37,7 @@ const ChangePasswordForm = () => {
       />
       <FormField
         name="confirmPassword"
-        onChange={(e) => validateReplayPassword(e)}
+        onChange={(e: any) => validateReplayPassword(e)}
         required
         placeholder="******"
         star
@@ -45,6 +45,6 @@ const ChangePasswordForm = () => {
       />
     </div>
   );
-};
+});
 
 export default ChangePasswordForm;

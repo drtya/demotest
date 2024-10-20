@@ -8,18 +8,26 @@ export async function middleware(req: NextRequest) {
   if (!token && !AuthPage) {
     return NextResponse.redirect(new URL(`/auth`, req.url));
   }
-
   try {
     if (token) {
       const decoded = await verifyToken(token);
+      const isTokenExpired = (decoded.exp as number) * 1000 < Date.now();
+      if (isTokenExpired) {
+        const response = NextResponse.redirect(new URL(`/auth`, req.url));
+        response.cookies.delete('token');
+        return response;
+      }
+
       if (AuthPage && decoded) {
         return NextResponse.redirect(new URL(`/profile`, req.url));
       }
     }
   } catch (error) {
-    console.error(error)
+    console.error(error);
     if (!AuthPage) {
-      return NextResponse.redirect(new URL(`/auth`, req.url));
+      const response = NextResponse.redirect(new URL(`/auth`, req.url));
+      response.cookies.delete('token');
+      return response;
     }
   }
 }

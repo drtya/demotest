@@ -1,12 +1,14 @@
 'use client';
 import { Input } from '@/components/ui/input';
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
+import { TextArea } from './textArea';
 
-interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement|HTMLTextAreaElement> {
   star?: boolean;
   fieldName: string;
   description?: string;
   errorMessage?: string;
+  textarea?: boolean;
 }
 
 const FormField = forwardRef<HTMLInputElement, FieldProps>(
@@ -17,6 +19,7 @@ const FormField = forwardRef<HTMLInputElement, FieldProps>(
       onChange,
       required,
       star,
+      textarea,
       description,
       errorMessage,
       ...props
@@ -48,14 +51,24 @@ const FormField = forwardRef<HTMLInputElement, FieldProps>(
         >
           {fieldName} {star ? <span className="text-primary">*</span> : null}
         </label>
-        <Input
-          required={required}
-          onChange={changeHandler}
-          name={name}
-          {...props}
-          ref={ref}
-          id={fieldName}
-        ></Input>
+        {textarea ? (
+          <TextArea
+            required={required}
+            onChange={onChange}
+            name={name}
+            {...props}
+            id={fieldName}
+          />
+        ) : (
+          <Input
+            required={required}
+            onChange={changeHandler}
+            name={name}
+            {...props}
+            ref={ref}
+            id={fieldName}
+          />
+        )}
         {description && (
           <div className="text-size14 text-black-80">{description}</div>
         )}

@@ -1,6 +1,6 @@
 'use client';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { memo } from 'react';
 
 export interface IHeaderNavbarList {
   linkName: string;
@@ -11,12 +11,12 @@ export interface HeaderNavbarProps extends React.HTMLAttributes<HTMLElement> {
   items: IHeaderNavbarList[];
 }
 
-const HeaderNavbar = React.forwardRef<HTMLDivElement, HeaderNavbarProps>(
+const HeaderNavbar = memo(React.forwardRef<HTMLDivElement, HeaderNavbarProps>(
   ({ className, items, ...props }, ref) => {
     const pathname = usePathname()
-    const {replace} =useRouter()
+    const {push} =useRouter()
     const clickHandler =(element:IHeaderNavbarList)=>{
-        replace(element.path)
+        push(element.path)
     }
     return (
       <nav
@@ -39,5 +39,5 @@ const HeaderNavbar = React.forwardRef<HTMLDivElement, HeaderNavbarProps>(
       </nav>
     );
   }
-);
+))
 export { HeaderNavbar };

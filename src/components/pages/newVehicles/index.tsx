@@ -1,12 +1,9 @@
-'use client'
-import React from 'react'
+import CreateVehicleForm from './ui/forms/create'
 
-type Props = {}
-
-const NewVehiclesPage = (props: Props) => {
+const NewVehiclesPage = () => {
     
   return (
-    <div>NewVehiclesPage</div>
+    <CreateVehicleForm/>
   )
 }
 

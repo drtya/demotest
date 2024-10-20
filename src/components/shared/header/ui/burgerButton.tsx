@@ -1,5 +1,5 @@
 'use client';
-import { useBurgerMenu } from '@/store/burger';
+import { useBurgerMenuStore } from '@/store/globalStore';
 
 const BurgerButton = ({
   className,
@@ -8,8 +8,8 @@ const BurgerButton = ({
   className?: string;
   colorClass?: string;
 }) => {
-  const isOpen = useBurgerMenu((state) => state.isOpen);
-  const toggleOpen = useBurgerMenu((state) => state.toggleOpen);
+  const isOpen = useBurgerMenuStore((state) => state.isOpen);
+  const toggleOpen = useBurgerMenuStore((state) => state.toggleOpen);
   return (
     <button
       className={`menuIconSize relative overflow-hidden block ${className}`}

@@ -1,13 +1,13 @@
-'use client'
-import React from 'react'
+import VehiclesList from './ui/list';
+import VehiclesHeader from './ui/headerList';
 
-type Props = {}
-
-const VehiclesPage = (props: Props) => {
-    
+const VehiclesPage = () => {
   return (
-    <div>VehiclesPage</div>
-  )
-}
+    <div>
+      <VehiclesHeader />
+      <VehiclesList />
+    </div>
+  );
+};
 
-export default VehiclesPage
+export default VehiclesPage;

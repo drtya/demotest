@@ -1,9 +1,7 @@
-import AuthPage from "@/components/pages/auth"
+import AuthPage from '@/components/pages/auth';
 
-const Page = () => {
-  return (
-    <AuthPage/>
-  )
-}
+const Page = async () => {
+  return <AuthPage />;
+};
 
-export default Page
+export default Page;

@@ -2,12 +2,12 @@
 import { Button } from '@/components/ui/button';
 import FormField from '@/components/ui/field';
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import ChangePasswordForm from './changePassword';
 import { editProfile } from '@/lib/actions/auth';
 
 
-const EditProfileForm = () => {
+const EditProfileForm = memo(() => {
   const [changePassword, setChangePassword] = useState<boolean>(false);
   const MInputs = useTranslations('ProfileInputs');
   const MActions = useTranslations('Actions');
@@ -57,6 +57,6 @@ const EditProfileForm = () => {
       </Button>
     </form>
   );
-};
+})
 
 export default EditProfileForm;
