@@ -12,6 +12,7 @@
     "logout": "Выйти"
   },
   "Actions":{
+    "addVehicle": "Добавить авто",
     "cancel":"Отмена",
     "saveChange":"Сохранить изменения"
   },
@@ -25,6 +26,16 @@
     "phone": "Номер телефона",
     "password": "Пароль",
     "emailDescription": "Это ваш логин"
+  },
+  "VehicleInputs": {
+    "VIN": "VIN",
+    "make": "Марка",
+    "model": "Модель",
+    "bodyType": "Кузов",
+    "fuelType": "Вид топлива",
+    "hp": "Мощность",
+    "amount": "Количество",
+    "description": "Описание"
   },
   "Navbar": {
     "logo": "Demo Test",

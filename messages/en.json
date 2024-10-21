@@ -12,6 +12,7 @@
     "logout": "Logout"
   },
   "Actions": {
+    "addVehicle": "Add vehicle",
     "cancel": "Cancel",
     "saveChange": "Save change"
   },
@@ -25,6 +26,16 @@
     "phone": "Contact phone",
     "password": "Password",
     "emailDescription": "This is your login"
+  },
+  "VehicleInputs": {
+    "VIN": "VIN",
+    "make": "Make",
+    "model": "Model",
+    "bodyType": "Body type",
+    "fuelType": "Fuel type",
+    "hp": "Horse power",
+    "amount": "Amount",
+    "description": "Description"
   },
   "Navbar": {
     "logo": "Demo Test",

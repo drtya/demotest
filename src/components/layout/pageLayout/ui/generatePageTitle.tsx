@@ -14,13 +14,12 @@ import { useVehicleStore } from '@/store/vehicle';
 
 const GeneratePageTitle = () => {
   const { vehiclesCount } = useVehicleStore();
-  console.log(vehiclesCount);
-  
+
   const MNav = useTranslations('Navbar');
   const MProfile = useTranslations('Profile');
   const pathname = usePathname();
   const { autoUUID } = useParams<{ autoUUID: string }>();
-  const getPageTitle: JSX.Element = useMemo(() => {
+  const getPageTitle = () => {
     if (pathname.startsWith('/profile')) {
       return (
         <Header
@@ -81,9 +80,9 @@ const GeneratePageTitle = () => {
         </Header>
       );
     } else return <Header />;
-  }, [pathname, vehiclesCount, autoUUID]);
+  };
 
-  return getPageTitle;
+  return getPageTitle();
 };
 
 export default GeneratePageTitle;
