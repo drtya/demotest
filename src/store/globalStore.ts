@@ -1,15 +1,6 @@
-import { create } from 'zustand';
-
-interface IBurgerMenu {
-  isOpen: boolean;
-  toggleOpen: () => void;
-}
-
-export const useBurgerMenuStore = create<IBurgerMenu>((set) => ({
-  isOpen: false,
-  toggleOpen: () => set((state) => ({ isOpen: !state.isOpen })),
-}));
-
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from './store';
 
 interface IGlobalParams {
   search: string;
@@ -17,23 +8,42 @@ interface IGlobalParams {
   countInPage: number;
 }
 
-export const useParamsStore = create<IGlobalParams>()((set) => ({
-  search:'',
-  filter:'',
-  countInPage:6,
-  setSearch:(search:string) => {
-    set({
-      search
-    });
+interface IGlobalState {
+  burger: boolean;
+  globalParams: IGlobalParams;
+}
+
+const initialState: IGlobalState = {
+  burger: false,
+  globalParams: {
+    search: '',
+    filter: '',
+    countInPage: 6,
   },
-  setFilter:(filter:string) => {
-    set({
-      filter
-    });
+};
+
+export const globalSlice = createSlice({
+  name: 'global',
+  initialState,
+  reducers: {
+    toggleBurgerMenu: (state) => {
+      state.burger = !state.burger;
+    },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.globalParams.search = action.payload;
+    },
+    setFilter: (state, action: PayloadAction<string>) => {
+      state.globalParams.filter = action.payload;
+    },
+    setCountInPage: (state, action: PayloadAction<number>) => {
+      state.globalParams.countInPage = action.payload;
+    },
   },
-  setCountInPage:(count:number) => {
-    set({
-      countInPage:count
-    });
-  },
-}));
+});
+
+export const { toggleBurgerMenu, setFilter, setSearch, setCountInPage } =
+  globalSlice.actions;
+
+export const selectGlobal = (state: RootState) => state.global;
+
+export default globalSlice.reducer;

@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import './globals.css';
 import { getMessages } from 'next-intl/server';
+import RTKQueryProvider from '@/components/layout/provider/RTKQuery';
 
 export default async function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className="bg-background">
         <NextIntlClientProvider messages={messages}>
-          {children}
+            <RTKQueryProvider>{children}</RTKQueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

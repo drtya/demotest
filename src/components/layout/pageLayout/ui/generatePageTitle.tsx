@@ -10,10 +10,10 @@ import {
   EditableHeaderTitle,
 } from '@/components/shared/header/ui/editableHeader';
 import { HeaderNavbar } from '@/components/shared/header/ui/headerNavigation';
-import { useVehicleStore } from '@/store/vehicle';
+import { useGetVehiclesCountQuery } from '@/services/vehicles';
 
 const GeneratePageTitle = () => {
-  const { vehiclesCount } = useVehicleStore();
+  const { data: vehiclesCount, isLoading, error } = useGetVehiclesCountQuery();
 
   const MNav = useTranslations('Navbar');
   const MProfile = useTranslations('Profile');
@@ -73,9 +73,13 @@ const GeneratePageTitle = () => {
         <Header>
           <div className="flex items-center gap-custom16">
             <HeaderTitle text={MNav('vehicles')} />
-            <CardInfo variant="amount" amount={vehiclesCount}>
-              {vehiclesCount}
-            </CardInfo>
+            {isLoading ? (
+              <div>load..</div>
+            ) : (
+              <CardInfo variant="amount" amount={vehiclesCount}>
+                {vehiclesCount}
+              </CardInfo>
+            )}
           </div>
         </Header>
       );

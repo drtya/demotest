@@ -1,5 +1,6 @@
 'use client';
-import { useBurgerMenuStore } from '@/store/globalStore';
+import { toggleBurgerMenu } from '@/store/globalStore';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 const BurgerButton = ({
   className,
@@ -8,8 +9,11 @@ const BurgerButton = ({
   className?: string;
   colorClass?: string;
 }) => {
-  const isOpen = useBurgerMenuStore((state) => state.isOpen);
-  const toggleOpen = useBurgerMenuStore((state) => state.toggleOpen);
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((store) => store.global.burger);
+  const toggleOpen = () => {
+    dispatch(toggleBurgerMenu());
+  };
   return (
     <button
       className={`menuIconSize relative overflow-hidden block ${className}`}

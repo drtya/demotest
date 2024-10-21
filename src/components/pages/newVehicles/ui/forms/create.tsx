@@ -1,18 +1,29 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import FormField from '@/components/ui/field';
-import { createVehicle } from '@/lib/actions/vehicle';
+import { IError } from '@/lib/types/errors';
+import { useAddVehicleMutation } from '@/services/vehicles';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
+
 const CreateVehicleForm = () => {
-  const MAction = useTranslations('Actions')
-  const MInputName = useTranslations('VehicleInputs')
+  const [addVehicle, { isLoading, isSuccess, error }] = useAddVehicleMutation();
+  const MAction = useTranslations('Actions');
+  const MInputName = useTranslations('VehicleInputs');
   const { push } = useRouter();
   const createHandler = async (formData: FormData) => {
-    await createVehicle(formData);
-    push('/vehicles');
+    await addVehicle(formData);
+    if (!error) push('/vehicles');
   };
+
+  const getErrorMessage = () => {
+    if (error) {
+      return (error as IError).data.error || 'An unknown error occurred';
+    }
+    return null;
+  };
+
   return (
     <form
       action={createHandler}
@@ -39,8 +50,16 @@ const CreateVehicleForm = () => {
         star
         placeholder="C-Class"
       />
-      <FormField name="bodyType" fieldName={MInputName('bodyType')} placeholder="Sedan" />
-      <FormField name="fuelType" fieldName={MInputName('fuelType')} placeholder="Petrol" />
+      <FormField
+        name="bodyType"
+        fieldName={MInputName('bodyType')}
+        placeholder="Sedan"
+      />
+      <FormField
+        name="fuelType"
+        fieldName={MInputName('fuelType')}
+        placeholder="Petrol"
+      />
       <FormField
         name="horsePower"
         type="number"
@@ -59,8 +78,11 @@ const CreateVehicleForm = () => {
         textarea
         placeholder="Description"
       />
+      {error && (
+        <div className="text-size15 text-primary-80">{getErrorMessage()}</div>
+      )}
       <Button type="submit" variant="primary">
-        {MAction('addVehicle')}
+        {isLoading ? 'Adding...' : MAction('addVehicle')}
       </Button>
     </form>
   );

@@ -1,6 +1,6 @@
 import AuthPage from '@/components/pages/auth';
 
-const Page = async () => {
+const Page = async () => {  
   return <AuthPage />;
 };
 
