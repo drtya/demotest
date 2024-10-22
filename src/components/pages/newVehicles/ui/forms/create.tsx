@@ -6,7 +6,6 @@ import { useAddVehicleMutation } from '@/services/vehicles';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
-
 const CreateVehicleForm = () => {
   const [addVehicle, { isLoading, isSuccess, error }] = useAddVehicleMutation();
   const MAction = useTranslations('Actions');
@@ -15,13 +14,6 @@ const CreateVehicleForm = () => {
   const createHandler = async (formData: FormData) => {
     await addVehicle(formData);
     if (!error) push('/vehicles');
-  };
-
-  const getErrorMessage = () => {
-    if (error) {
-      return (error as IError).data.error || 'An unknown error occurred';
-    }
-    return null;
   };
 
   return (
@@ -79,10 +71,12 @@ const CreateVehicleForm = () => {
         placeholder="Description"
       />
       {error && (
-        <div className="text-size15 text-primary-80">{getErrorMessage()}</div>
+        <div className="text-size15 text-primary-80">
+          {(error as IError).data.error || 'An unknown error occurred'}
+        </div>
       )}
-      <Button type="submit" variant="primary">
-        {isLoading ? 'Adding...' : MAction('addVehicle')}
+      <Button type="submit" variant="primary" disabled={isLoading}>
+        {MAction('addVehicle')}
       </Button>
     </form>
   );

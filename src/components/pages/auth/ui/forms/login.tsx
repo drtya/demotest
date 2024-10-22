@@ -2,21 +2,19 @@
 import { Button } from '@/components/ui/button';
 import FormField from '@/components/ui/field';
 import Link from 'next/link';
-import { signIn } from '@/lib/actions/auth';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useLoginMutation } from '@/services/profile';
+import { IError } from '@/lib/types/errors';
 
 const LoginForm = () => {
+  const { push } = useRouter();
   const MAuth = useTranslations('Auth');
   const MInputs = useTranslations('ProfileInputs');
-  const [error, setError] = useState('');
+  const [login, { isLoading, error }] = useLoginMutation();
   const signinHandler = async (formData: FormData) => {
-    const res = await signIn(formData);
-    if (res) {
-      setError(res);
-    } else {
-      setError('');
-    }
+    await login(formData);
+    if (!error) push('/profile');
   };
   return (
     <div className="w-full">
@@ -43,12 +41,16 @@ const LoginForm = () => {
             type="password"
           />
         </div>
-        {error && <div className="text-primary text-size15">{error}</div>}
+        {error && (
+          <div className="text-primary text-size15">
+            {(error as IError).data.error}
+          </div>
+        )}
         <Link className="inline-block text-pink " href="#">
           {MAuth('forgotPassword')}
         </Link>
         <div className="flex flex-col gap-custom24">
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" disabled={isLoading}>
             {MAuth('signin')}
           </Button>
           <Button type="button" variant="secondary">

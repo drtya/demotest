@@ -74,7 +74,7 @@ const GeneratePageTitle = () => {
           <div className="flex items-center gap-custom16">
             <HeaderTitle text={MNav('vehicles')} />
             {isLoading ? (
-              <div>load..</div>
+              <CardInfo variant="amount" amount={0}>...</CardInfo>
             ) : (
               <CardInfo variant="amount" amount={vehiclesCount}>
                 {vehiclesCount}

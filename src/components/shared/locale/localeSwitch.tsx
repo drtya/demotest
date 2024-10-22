@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import LocaleSwitcherSelect from './localeSwotchSelect';
 import { useLocale } from 'next-intl';
 import eng from '@/assets/images/lang/eng.svg';
@@ -18,7 +18,7 @@ export default memo(function LocaleSwitch() {
           value: 'en',
           label: 'English',
           visibleTag: (
-            <div className="flex items-center gap-1 h-10">
+            <div className="flex items-center text-size20 gap-1 h-10">
               <Image
                 src={eng}
                 alt="en"
@@ -27,7 +27,13 @@ export default memo(function LocaleSwitch() {
                 className="rounded-full w-8 h-8 object-cover"
               />
               En
-              <Image src={chevronDown} alt="down" width={14} height={14} />
+              <Image
+                src={chevronDown}
+                className="fill-current w-4 h-4"
+                alt="down"
+                width={14}
+                height={14}
+              />
             </div>
           ),
         },
