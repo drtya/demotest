@@ -15,7 +15,7 @@ model User {
   email    String  @unique
   fullName String
   password String
-  photo    String?
+  photo    Bytes?
   phone    String?
 }
 

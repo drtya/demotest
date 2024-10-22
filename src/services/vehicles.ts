@@ -1,6 +1,11 @@
 import { IVehicle } from '@/lib/types/vehicle';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+interface VehicleResponse {
+  vehicle: IVehicle[];
+  totalPages: number;
+}
+
 export const vehiclesApi = createApi({
   reducerPath: 'vehiclesApi',
   baseQuery: fetchBaseQuery({
@@ -8,8 +13,19 @@ export const vehiclesApi = createApi({
   }),
   tagTypes: ['Vehicles'], // Определяем тип тега
   endpoints: (builder) => ({
-    getVehicles: builder.query<IVehicle[], void>({
-      query: () => '',
+    getVehicles: builder.query<
+      VehicleResponse,
+      { searchQuery: string; page: string; pageSize: string }
+    >({
+      query: ({ searchQuery, page, pageSize }) => ({
+        url: '',
+        params: {
+          search: searchQuery, // Параметр поиска
+          page, // Параметр пагинации
+          limit: pageSize, // Количество элементов на странице
+        },
+      }),
+      transformResponse: (response: VehicleResponse) => response,
       providesTags: ['Vehicles'], // Связываем этот запрос с тегом 'Vehicles'
     }),
     addVehicle: builder.mutation<IVehicle, FormData>({

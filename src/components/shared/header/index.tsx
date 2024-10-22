@@ -12,19 +12,17 @@ export interface IHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen?: boolean;
 }
 
-const Header = memo(
-  React.forwardRef<HTMLDivElement, IHeaderProps>(
-    ({ className, nav, children, ...props }, ref) => (
-      <header className="p-headerAuth w-full z-10">
-        <div className="flex items-center justify-between">
-          {children}
-          <HeaderProfile className="max-sm:hidden" />
-        </div>
-        <div className="border-b mt-custom24" ref={ref} {...props}>
-          {nav}
-        </div>
-      </header>
-    )
+const Header = React.forwardRef<HTMLDivElement, IHeaderProps>(
+  ({ className, nav, children, ...props }, ref) => (
+    <header className="p-headerAuth w-full z-10">
+      <div className="flex items-center justify-between">
+        {children}
+        <HeaderProfile className="max-sm:hidden" />
+      </div>
+      <div className="border-b mt-custom24" ref={ref} {...props}>
+        {nav}
+      </div>
+    </header>
   )
 );
 

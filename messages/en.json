@@ -12,6 +12,7 @@
     "logout": "Logout"
   },
   "Actions": {
+    "pageSize":"Select cars per page:",
     "addVehicle": "Add vehicle",
     "cancel": "Cancel",
     "saveChange": "Save change"

@@ -19,7 +19,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }, [variant]);
     return (
       <button
-        className={`p-button uppercase rounded-button outline-none text-size14 duration-300 ${variantStyle}`}
+        className={`!disabled:bg-black-45 !disabled:cursor-not-allowed p-button uppercase rounded-button outline-none text-size14 duration-300 ${variantStyle}`}
         ref={ref}
         {...props}
       />

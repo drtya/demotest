@@ -3,9 +3,48 @@ import { IVehicle } from '@/lib/types/vehicle';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const searchQuery = searchParams.get('search') || '';
+  const page = parseInt(searchParams.get('page') || '1');
+  const limit = parseInt(searchParams.get('limit') || '6');
+  const skip = (page - 1) * limit;
+
   try {
-    const vehicle: IVehicle[] = await prisma.vehicle.findMany();
-    return new Response(JSON.stringify(vehicle), { status: 200 });
+    const vehicle:IVehicle[] = await prisma.vehicle.findMany({
+      where: {
+        OR: [
+          {
+            model: { startsWith: searchQuery },
+          },
+          {
+            make: { startsWith: searchQuery },
+          },
+          {
+            vin: { startsWith: searchQuery },
+          },
+        ],
+      },
+      skip,
+      take: limit,
+    });
+    const totalCount:number = await prisma.vehicle.count({
+      where: {
+        OR: [
+          {
+            model: { startsWith: searchQuery },
+          },
+          {
+            make: { startsWith: searchQuery },
+          },
+          {
+            vin: { startsWith: searchQuery },
+          },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(totalCount / limit);
+    return new Response(JSON.stringify({vehicle,totalPages}), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Failed to fetch cars' }), {
       status: 500,
@@ -37,7 +76,7 @@ export async function POST(request: NextRequest) {
       },
     });
     return new Response(JSON.stringify(newVehicle), { status: 201 });
-  } catch (error:any) {
+  } catch (error: any) {
     console.error('Error creating vehicle:', error); // Логируем ошибку на сервере
 
     // Если ошибка связана с уникальностью или валидацией
@@ -50,6 +89,5 @@ export async function POST(request: NextRequest) {
     return new Response(JSON.stringify({ error: 'Failed to create car' }), {
       status: 500,
     });
-  
   }
 }

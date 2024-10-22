@@ -4,8 +4,8 @@ import type { RootState } from './store';
 
 interface IGlobalParams {
   search: string;
-  filter: string;
-  countInPage: number;
+  currentPage: string;
+  pageSize: string;
 }
 
 interface IGlobalState {
@@ -17,8 +17,8 @@ const initialState: IGlobalState = {
   burger: false,
   globalParams: {
     search: '',
-    filter: '',
-    countInPage: 6,
+    currentPage: '1',
+    pageSize: '6',
   },
 };
 
@@ -32,16 +32,16 @@ export const globalSlice = createSlice({
     setSearch: (state, action: PayloadAction<string>) => {
       state.globalParams.search = action.payload;
     },
-    setFilter: (state, action: PayloadAction<string>) => {
-      state.globalParams.filter = action.payload;
+    setCurrentPage: (state, action: PayloadAction<string>) => {
+      state.globalParams.currentPage = action.payload;
     },
-    setCountInPage: (state, action: PayloadAction<number>) => {
-      state.globalParams.countInPage = action.payload;
+    setPageSize: (state, action: PayloadAction<string>) => {
+      state.globalParams.pageSize = action.payload;
     },
   },
 });
 
-export const { toggleBurgerMenu, setFilter, setSearch, setCountInPage } =
+export const { toggleBurgerMenu, setCurrentPage, setSearch, setPageSize } =
   globalSlice.actions;
 
 export const selectGlobal = (state: RootState) => state.global;
