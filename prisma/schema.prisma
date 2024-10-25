@@ -10,13 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//у меня есть модель prisma для автосалона, можешь улучшить данную модель, сделай так чтобы у сущьности user было поле cart с выбронными им автомобилями которое связанно с полем amount из vehicle, при добавлении cart поле amount должно увеличиться
 model User {
-  uuid     String  @id @default(cuid())
-  email    String  @unique
+  uuid     String    @id @default(cuid())
+  email    String    @unique
   fullName String
   password String
   photo    Bytes?
   phone    String?
+  cart     Cart[]
+  vehicles Vehicle[] @relation("UserVehicles") // Связь с объявлениями пользователя
 }
 
 model Vehicle {
@@ -26,12 +29,26 @@ model Vehicle {
   make        String
   model       String
   bodyType    String?
-  image       String?
+  image       Bytes?
   fuelType    String?
   horsePower  Int?
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
-  amount      Int?
+  amount      Int      @default(0) // Количество автомобилей на складе
   maxAmount   Int?
+  author      User     @relation(fields: [authorId], references: [uuid], name: "UserVehicles")
+  authorId    String
+  cartItems   Cart[] // Связь с корзинами пользователей
+}
+
+model Cart {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [uuid])
+  userId    String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [uuid])
+  vehicleId String
+  quantity  Int      @default(1) // Количество автомобилей в корзине
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

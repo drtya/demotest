@@ -1,7 +1,7 @@
 import prisma from '@/lib/db';
 import { compairPassword } from '@/lib/utils/bcrypt';
 import { cookies } from 'next/headers';
-import { createToken } from '@/lib/utils/jwt';
+import { createToken } from '@/lib/utils/jwt/server';
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {

@@ -2,7 +2,7 @@ import { IVehicle } from '@/lib/types/vehicle';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface VehicleResponse {
-  vehicle: IVehicle[];
+  vehiclesWithOwnershipFlag: IVehicle[];
   totalPages: number;
 }
 

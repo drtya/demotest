@@ -126,6 +126,7 @@ const config: Config = {
         '.w-navbar': generateStyle('width', 180, 256),
         '.w-custom200': generateStyle('width', 90, 200),
         '.text-size32': generateStyle('fontSize', 18, 32),
+        '.text-size24': generateStyle('fontSize', 16, 24),
         '.text-size20': generateStyle('fontSize', 14, 20),
         '.text-size16': generateStyle('fontSize', 11, 16),
         '.text-size15': generateStyle('fontSize', 10, 15),
@@ -155,6 +156,8 @@ const config: Config = {
         ...generateSpace('.m-custom', 'margin'),
         ...generateSpace('.gap-custom', 'gap'),
         ...generateSpace('.pt-custom', 'paddingTop'),
+        ...generateSpace('.pl-custom', 'paddingLeft'),
+        ...generateSpace('.pr-custom', 'paddingRight'),
         ...generateSpace('.pb-custom', 'paddingBottom'),
         ...generateSpace('.p-custom', 'padding'),
       });

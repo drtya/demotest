@@ -1,10 +1,11 @@
-import { JWTPayload } from "jose";
+import { JWTPayload } from 'jose';
 
-export interface UserJWT extends JWTPayload {
+export interface IProfile {
   uuid: string;
-  login: string;
   email: string;
   fullName: string;
-  password: string;
+  password?: string;
   photo?: string;
+  phone?: string;
 }
+export interface UserJWT extends JWTPayload, IProfile {}

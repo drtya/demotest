@@ -4,13 +4,17 @@ import { useLogoutMutation } from '@/services/profile';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { vehiclesApi } from '@/services/vehicles';
+import { useAppDispatch } from '@/store/hooks';
 
 const LogoutButton = () => {
+  const dispatch = useAppDispatch();
   const { push } = useRouter();
   const t = useTranslations('Auth');
   const [logout, { isLoading, error }] = useLogoutMutation();
   const logoutHandler = async () => {
     await logout();
+    dispatch(vehiclesApi.util.resetApiState());
     if (!error) push('/auth');
   };
   return (
