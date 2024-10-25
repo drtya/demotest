@@ -1,5 +1,6 @@
 import prisma from '@/lib/db';
-import { IVehicle } from '@/lib/types/vehicle';
+import { decodeToken } from '@/lib/utils/jwt/server';
+import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -10,7 +11,12 @@ export async function GET(request: NextRequest) {
   const skip = (page - 1) * limit;
 
   try {
-    const vehicle:IVehicle[] = await prisma.vehicle.findMany({
+    const user =await decodeToken(cookies().get('token')?.value as string);
+
+    const vehicles = await prisma.vehicle.findMany({
+      include: {
+        author: true,
+      },
       where: {
         OR: [
           {
@@ -27,7 +33,20 @@ export async function GET(request: NextRequest) {
       skip,
       take: limit,
     });
-    const totalCount:number = await prisma.vehicle.count({
+
+    const vehiclesWithOwnershipFlag = vehicles.map((vehicle) => {
+      let imageUrl = null;
+      if (vehicle.image) {
+        const base64Image = Buffer.from(vehicle.image).toString('base64');
+        imageUrl = `data:image/jpeg;base64,${base64Image}`;
+      }
+      return {
+        ...vehicle,
+        image: imageUrl,
+        isCreatedByUser: vehicle.authorId === user?.uuid, // Флаг для автомобилей, созданных текущим пользователем
+      };
+    });
+    const totalCount: number = await prisma.vehicle.count({
       where: {
         OR: [
           {
@@ -44,7 +63,12 @@ export async function GET(request: NextRequest) {
     });
 
     const totalPages = Math.ceil(totalCount / limit);
-    return new Response(JSON.stringify({vehicle,totalPages}), { status: 200 });
+    return new Response(
+      JSON.stringify({ vehiclesWithOwnershipFlag, totalPages }),
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Failed to fetch cars' }), {
       status: 500,
@@ -53,8 +77,14 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const user =await decodeToken(cookies().get('token')?.value as string);
   const formData = await request.formData();
-
+  let imageUrl = null;
+  const file = formData.get('image') as File | null;
+  if (file?.size) {
+    const arrayBuffer = await file.arrayBuffer();
+    imageUrl = Buffer.from(arrayBuffer);
+  }
   const createSlug = `${(formData.get('make') as string)
     .replace(/\s+/g, '-')
     .toLowerCase()}-${(formData.get('model') as string)
@@ -68,6 +98,8 @@ export async function POST(request: NextRequest) {
         slug: createSlug,
         make: formData.get('make') as string,
         model: formData.get('model') as string,
+        authorId: user?.uuid!,
+        image: imageUrl,
         bodyType: (formData.get('bodyType') as string) ?? null,
         fuelType: (formData.get('fuelType') as string) ?? null,
         maxAmount: Number(formData.get('maxAmount') as string) ?? null,

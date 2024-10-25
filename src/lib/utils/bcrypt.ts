@@ -1,3 +1,4 @@
+'use server'
 import bcrypt from 'bcrypt';
 
 const hashPassword = async(password: string) => {

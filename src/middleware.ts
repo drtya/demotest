@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken } from './lib/utils/jwt';
+import { verifyToken } from './lib/utils/jwt/server';
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;

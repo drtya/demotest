@@ -1,25 +1,15 @@
 'use client';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
 import LocaleSwitch from '../../locale/localeSwitch';
 import LogoutButton from './logoutButton';
-import { getCookie } from 'cookies-next';
-import { decodeToken } from '@/lib/utils/jwt';
 import BurgerButton from './burgerButton';
-import { useGetProfileByIdQuery } from '@/services/profile';
+import noImg from '@/../public/no-img.svg';
+import { useGetUserData } from '@/lib/hooks/use.userData';
 
 const HeaderProfile = ({ className }: { className?: string }) => {
-  const [token, setToken] = useState<any>(null);
-  const [user, setUser] = useState<any>(null);
-  const { data, isLoading, error } = useGetProfileByIdQuery(
-    decodeToken(token as string)?.uuid as string
-  );
-  useEffect(() => {
-    setToken(getCookie('token'));
-  }, []);
-  useEffect(() => {
-    setUser(data);
-  }, [data]);
+  const { data: user, isLoading, error } = useGetUserData();
+  console.log('user',user);
+  
   if (isLoading) {
     <div>Loading...</div>;
   }
@@ -34,7 +24,7 @@ const HeaderProfile = ({ className }: { className?: string }) => {
               borderRadius: '100%',
               objectFit: 'cover',
             }}
-            src={user.photo || '/profilePhoto.png'}
+            src={user.photo || noImg}
             width={50}
             height={50}
             alt="photo"

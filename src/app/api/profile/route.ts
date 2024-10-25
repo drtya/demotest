@@ -1,7 +1,7 @@
 import prisma from '@/lib/db';
 import { hashPassword } from '@/lib/utils/bcrypt';
 import { cookies } from 'next/headers';
-import { createToken, decodeToken } from '@/lib/utils/jwt';
+import { createToken, decodeToken } from '@/lib/utils/jwt/server';
 
 export async function POST(req: Request) {
   try {
@@ -13,14 +13,15 @@ export async function POST(req: Request) {
       });
     }
 
-    const session = decodeToken(token as string);
+    const session =await decodeToken(token as string);
     const formData = await req.formData();
     const newPass = formData.get('newPassword') as string;
-    let imageUrl;
-    const file = formData.get('photo') as File;
-
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    let imageUrl = null;
+    const file = formData.get('photo') as File | null;
+    if (file?.size) {
+      const arrayBuffer = await file.arrayBuffer();
+      imageUrl = Buffer.from(arrayBuffer);
+    }
 
     const updatedUser = await prisma.user.update({
       where: {
@@ -31,18 +32,11 @@ export async function POST(req: Request) {
         email: formData.get('email') as string,
         phone: (formData.get('phone') as string) ?? '',
         password: newPass ? await hashPassword(newPass) : session?.password,
-        photo: buffer,
+        photo: imageUrl,
       },
     });
-    if (updatedUser.photo) {
-      const base64Image = Buffer.from(updatedUser.photo).toString('base64');
-      imageUrl = `data:image/jpeg;base64,${base64Image}`;
-    }
 
-    const jwtPayload = await createToken({
-      ...updatedUser,
-      photo: imageUrl || null,
-    });
+    const jwtPayload = await createToken({ uuid: updatedUser.uuid });
     cookies().set('token', jwtPayload);
     return new Response(JSON.stringify('Пользователь обновлен!'), {
       status: 200,

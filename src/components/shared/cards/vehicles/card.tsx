@@ -2,8 +2,11 @@ import { CardInfo } from '@/components/ui/cardInfoplate';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import React, { useCallback } from 'react';
+import FavoriteButton from './ui/favoriteButton';
+import CarCreator from './ui/myCarHover';
 
 interface IVehicleCard extends React.HTMLAttributes<HTMLDivElement> {
+  isCreatedByUser?: boolean;
   image: string;
   settingsAction: Function;
   title?: string;
@@ -15,6 +18,7 @@ interface IVehicleCard extends React.HTMLAttributes<HTMLDivElement> {
 const VehicleCard = React.forwardRef<HTMLDivElement, IVehicleCard>(
   (
     {
+      isCreatedByUser,
       className,
       footer,
       settingsAction,
@@ -29,6 +33,7 @@ const VehicleCard = React.forwardRef<HTMLDivElement, IVehicleCard>(
     const settingsHandler = useCallback(settingsAction, [settingsAction]);
     return (
       <div
+        title={isCreatedByUser ? 'Это ваше объявление' : ''}
         className={`max-w-[360px] rounded-md bg-card p-custom20 relative flex flex-col gap-custom16 justify-between ${className}`}
         {...props}
         ref={ref}
@@ -39,6 +44,7 @@ const VehicleCard = React.forwardRef<HTMLDivElement, IVehicleCard>(
         >
           <EllipsisHorizontalIcon />
         </button>
+        {isCreatedByUser ? <CarCreator /> : <FavoriteButton />}
         {position && (
           <CardInfo
             variant="position"

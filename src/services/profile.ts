@@ -1,3 +1,4 @@
+import { IProfile } from '@/lib/types/user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const profileApi = createApi({
@@ -7,11 +8,11 @@ export const profileApi = createApi({
   }),
   tagTypes: ['Profile'],
   endpoints: (builder) => ({
-    getProfileById: builder.query<any, string>({
+    getProfileById: builder.query<IProfile, string>({
       query: (id) => `/profile/${id}`,
       providesTags: ['Profile'],
     }),
-    updateProfile: builder.mutation<any, FormData>({
+    updateProfile: builder.mutation<IProfile, FormData>({
       query: (newProfile) => ({
         url: '/profile',
         method: 'POST',
@@ -22,7 +23,7 @@ export const profileApi = createApi({
       }),
       invalidatesTags: ['Profile'],
     }),
-    register: builder.mutation<any, FormData>({
+    register: builder.mutation<IProfile, FormData>({
       query: (registerData) => ({
         url: '/register',
         method: 'POST',
@@ -33,7 +34,7 @@ export const profileApi = createApi({
       }),
       invalidatesTags: ['Profile'],
     }),
-    login: builder.mutation<any, FormData>({
+    login: builder.mutation<IProfile, FormData>({
       query: (loginData) => ({
         url: '/login',
         method: 'POST',

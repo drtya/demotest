@@ -2,7 +2,7 @@
 import {
   VehicleCard,
   VehicleCardFooter,
-} from '@/components/shared/vehicles/ui/card';
+} from '@/components/shared/cards/vehicles/card';
 import Pagination from '@/components/ui/pagination';
 import { IError } from '@/lib/types/errors';
 import { useGetVehiclesQuery } from '@/services/vehicles';
@@ -27,25 +27,23 @@ const VehiclesList = () => {
     page: currentPage,
     pageSize,
   });
-
-  console.log(data?.vehicle);
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {(error as IError).data.error}</div>;
   return (
     <div>
-      {!data?.vehicle?.length ? (
+      {!data?.vehiclesWithOwnershipFlag?.length ? (
         <div>Список автомобилей пуст</div>
       ) : (
         <div>
           <div className="grid grid-cols-3 gap-custom32">
-            {data?.vehicle?.map((el) => {
+            {data?.vehiclesWithOwnershipFlag?.map((el) => {
               return (
                 <VehicleCard
+                  isCreatedByUser={el.isCreatedByUser}
                   settingsAction={() => {}}
                   title={`${el.make} ${el.model}`}
                   description={el.vin}
-                  image={el.image || '/mersedes.png'}
+                  image={el.image || '/no-car-img.png'}
                   footer={
                     <VehicleCardFooter
                       amount={el.amount}

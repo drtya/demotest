@@ -1,0 +1,107 @@
+Чтобы учесть автора для каждого автомобиля, у модели Vehicle уже есть поле author, которое связывает его с моделью User. Это поле используется для хранения информации о том, кто подал объявление о продаже автомобиля.
+
+Вот как модель будет выглядеть с учётом автора и всех предыдущих изменений:
+
+model User {
+  uuid     String  @id @default(cuid())
+  email    String  @unique
+  fullName String
+  password String
+  photo    Bytes?
+  phone    String?
+  cart     Cart[]
+  vehicles Vehicle[] @relation("UserVehicles") // Связь с объявлениями пользователя
+}
+
+model Vehicle {
+  uuid         String     @id @default(cuid())
+  slug         String     @unique
+  vin          String
+  make         String
+  model        String
+  bodyType     String?
+  image        String?
+  fuelType     String?
+  horsePower   Int?
+  description  String?
+  updatedAt    DateTime   @updatedAt
+  createdAt    DateTime   @default(now())
+  amount       Int        @default(0) // Количество автомобилей на складе
+  maxAmount    Int?
+  author       User       @relation(fields: [authorId], references: [uuid], name: "UserVehicles")
+  authorId     String
+  cartItems    Cart[]     // Связь с корзинами пользователей
+}
+
+model Cart {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [uuid])
+  userId     String
+  vehicle    Vehicle  @relation(fields: [vehicleId], references: [uuid])
+  vehicleId  String
+  quantity   Int      @default(1) // Количество автомобилей в корзине
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+Изменения:
+Добавлено поле vehicles в модель User, чтобы связать пользователя с объявлениями, которые он подал.
+Связь между пользователем и объявлением о продаже автомобиля создается через поле author в модели Vehicle, как и прежде. Однако теперь оно явным образом связано через имя отношения UserVehicles, чтобы исключить путаницу с другими связями.
+
+
+
+/////
+
+Чтобы указать, что у каждого Vehicle может быть автор (тот, кто подал объявление), мы уже включили связь author в модели Vehicle. Однако, для большей ясности и исправления возможных неточностей, обновим модель так, чтобы автор был необязательным (например, если объявление может быть подано анонимно или это может быть автосалон).
+
+Вот обновленная модель:
+
+model User {
+  uuid     String  @id @default(cuid())
+  email    String  @unique
+  fullName String
+  password String
+  photo    Bytes?
+  phone    String?
+  cart     Cart[]
+  vehicles Vehicle[]  // Связь с автомобилями, автором которых является пользователь
+}
+
+model Vehicle {
+  uuid         String     @id @default(cuid())
+  slug         String     @unique
+  vin          String
+  make         String
+  model        String
+  bodyType     String?
+  image        String?
+  fuelType     String?
+  horsePower   Int?
+  description  String?
+  updatedAt    DateTime   @updatedAt
+  createdAt    DateTime   @default(now())
+  amount       Int        @default(0)
+  maxAmount    Int?
+  author       User?      @relation(fields: [authorId], references: [uuid]) // Опциональный автор
+  authorId     String?    // Поле может быть null, если автор не указан
+  cartItems    Cart[]     // Связь с корзиной
+}
+
+model Cart {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [uuid])
+  userId     String
+  vehicle    Vehicle  @relation(fields: [vehicleId], references: [uuid])
+  vehicleId  String
+  quantity   Int      @default(1)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+Изменения:
+Связь author теперь опциональная (User?), что позволяет объявлению не иметь автора.
+Поле authorId также стало опциональным (String?).
+Добавлена обратная связь в модель User — поле vehicles, чтобы получить список всех автомобилей, которые пользователь опубликовал.
+Теперь каждый автомобиль может иметь автора, но это необязательно.
+
+
