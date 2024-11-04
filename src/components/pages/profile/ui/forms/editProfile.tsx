@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import React, {
   ChangeEvent,
   FormEvent,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -13,11 +14,11 @@ import ChangePasswordForm from './changePassword';
 import { useUpdateProfileMutation } from '@/services/profile';
 import { IError } from '@/lib/types/errors';
 import { ProfileCard } from '@/components/shared/cards/profile/card';
-import { useGetUserData } from '@/lib/hooks/use.userData';
+import { UserDetailContext } from '@/app/_context/userDetailContext';
 
 const EditProfileForm = () => {
   const refImage: any = useRef(null);
-  const { data: user } = useGetUserData();
+  const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const [changePassword, setChangePassword] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<string>('');
 
@@ -25,10 +26,10 @@ const EditProfileForm = () => {
   const MActions = useTranslations('Actions');
 
   useEffect(() => {
-    if (user?.photo) {
-      setPreviewImage(user?.photo);
+    if (userDetail?.photo) {
+      setPreviewImage(userDetail?.photo);
     }
-  }, [user]);
+  }, [userDetail]);
 
   console.log(previewImage);
 
@@ -56,7 +57,7 @@ const EditProfileForm = () => {
   return (
     <>
       <ProfileCard
-        userName={user?.fullName}
+        userName={userDetail?.fullName}
         htmlFor="profileImg"
         image={previewImage}
         className="mb-custom32"

@@ -1,6 +1,6 @@
 import { JWTPayload } from 'jose';
 
-export interface IProfile {
+export interface IUser {
   uuid: string;
   email: string;
   fullName: string;
@@ -8,4 +8,4 @@ export interface IProfile {
   photo?: string;
   phone?: string;
 }
-export interface UserJWT extends JWTPayload, IProfile {}
+export interface UserJWT extends JWTPayload, IUser {}

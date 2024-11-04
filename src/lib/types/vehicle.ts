@@ -1,4 +1,4 @@
-import { IProfile } from './user';
+import { IUser } from './user';
 
 export interface IVehicle {
   uuid: string;
@@ -18,4 +18,5 @@ export interface IVehicle {
   authorId?: string | null;
   // author?: IProfile;
   isCreatedByUser?: boolean;
+  favorites?: boolean;
 }

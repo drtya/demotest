@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     cookies().delete('token');
     return new Response(JSON.stringify('Вы вышли с аккаунта'), {
-      status: 500,
+      status: 200,
     });
   } catch (error) {
     console.error(error);

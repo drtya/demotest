@@ -11,7 +11,33 @@ export async function GET(request: NextRequest) {
   const skip = (page - 1) * limit;
 
   try {
-    const user =await decodeToken(cookies().get('token')?.value as string);
+    const user = await decodeToken(cookies().get('token')?.value as string);
+
+    const cart = await prisma.cart.findMany({
+      include: {
+        vehicle: true,
+        user: true,
+      },
+      where: {
+        userId: user?.uuid,
+        OR: [
+          {
+            vehicle: { model: { startsWith: searchQuery } },
+          },
+          {
+            vehicle: { make: { startsWith: searchQuery } },
+          },
+          {
+            vehicle: { vin: { startsWith: searchQuery } },
+          },
+        ],
+      },
+
+      skip,
+      take: limit,
+    });
+
+    const cartList = cart.map((cartItem) => cartItem.vehicle.uuid);
 
     const vehicles = await prisma.vehicle.findMany({
       include: {
@@ -43,9 +69,11 @@ export async function GET(request: NextRequest) {
       return {
         ...vehicle,
         image: imageUrl,
-        isCreatedByUser: vehicle.authorId === user?.uuid, // Флаг для автомобилей, созданных текущим пользователем
+        isCreatedByUser: vehicle.authorId === user?.uuid,
+        favorites: cartList.includes(vehicle.uuid),
       };
     });
+
     const totalCount: number = await prisma.vehicle.count({
       where: {
         OR: [
@@ -77,7 +105,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const user =await decodeToken(cookies().get('token')?.value as string);
+  const user = await decodeToken(cookies().get('token')?.value as string);
   const formData = await request.formData();
   let imageUrl = null;
   const file = formData.get('image') as File | null;

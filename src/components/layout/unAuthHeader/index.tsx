@@ -1,5 +1,4 @@
 import { Header } from '@/components/shared/header';
-import LocaleSwitch from '@/components/shared/locale/localeSwitch';
 import React from 'react';
 
 type Props = {};

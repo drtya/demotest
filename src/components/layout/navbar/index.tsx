@@ -1,15 +1,13 @@
 import BurgerButton from '@/components/shared/header/ui/burgerButton';
 import HeaderProfile from '@/components/shared/header/ui/headerProfile';
 import { useTranslations } from 'next-intl';
-import { IMenuLink } from './types';
+import { navMenu } from '@/lib/data/nav';
 import NavLink from './ui/navLink';
 import NavbarOverlay from './ui/navbarOverlay';
 
 const Navbar = ({
-  navLinks,
   className,
 }: {
-  navLinks: IMenuLink[];
   className?: string;
 }) => {
   const MNavbar = useTranslations('Navbar');
@@ -21,7 +19,7 @@ const Navbar = ({
       </div>
       <nav className="flex flex-col justify-between h-full">
         <ol className="space-y-custom10">
-          {navLinks.map((li) => (
+          {navMenu.map((li) => (
             <NavLink key={`navbar_${li.title}`} li={li}/>
           ))}
         </ol>

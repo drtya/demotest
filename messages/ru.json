@@ -42,7 +42,8 @@
     "logo": "Demo Test",
     "profile": "Профиль",
     "vehicles": "Автомобили",
-    "setting": "Настройки"
+    "setting": "Настройки",
+    "myVehicles": "Мои Автомобили"
   },
   "Profile": {
     "profile": "Профиль",

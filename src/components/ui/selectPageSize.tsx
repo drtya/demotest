@@ -3,7 +3,7 @@ import { setPageSize } from '@/store/globalStore';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import * as Select from '@radix-ui/react-select';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const items = ['6', '9', '12', '20'];
 const SelectPageSize = () => {
@@ -11,9 +11,17 @@ const SelectPageSize = () => {
     (store) => store.global.globalParams.pageSize
   );
   const dispatch = useAppDispatch();
-  const onChange = useCallback((value: string) => {
-    dispatch(setPageSize(value));
+  useEffect(() => {
+    return () => {
+      dispatch(setPageSize('6'));
+    };
   }, []);
+  const onChange = useCallback(
+    (value: string) => {
+      dispatch(setPageSize(value));
+    },
+    [defaultValue]
+  );
   return (
     <div className="relative w-auto">
       <Select.Root defaultValue={defaultValue} onValueChange={onChange}>
@@ -23,9 +31,9 @@ const SelectPageSize = () => {
             'rounded-sm text-size15 p-custom10 transition-colors hover:bg-slate-100 border outline-none'
           }
         >
-          <Select.Icon className='flex items-center gap-2'>
+          <Select.Icon className="flex items-center gap-2">
             {defaultValue}
-            <ChevronDownIcon className='w-4 h-4'/>
+            <ChevronDownIcon className="w-4 h-4" />
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
