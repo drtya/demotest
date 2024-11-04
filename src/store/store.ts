@@ -4,6 +4,7 @@ import { vehiclesApi } from '@/services/vehicles';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { profileApi } from '@/services/profile';
 import userUUIDReducer from './user';
+import { cartApi } from '@/services/cart';
 
 export const store = configureStore({
   reducer: {
@@ -11,11 +12,13 @@ export const store = configureStore({
     userUUID: userUUIDReducer,
     [vehiclesApi.reducerPath]: vehiclesApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
+    [cartApi.reducerPath]: cartApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(vehiclesApi.middleware)
-      .concat(profileApi.middleware),
+      .concat(profileApi.middleware)
+      .concat(cartApi.middleware),
 });
 
 setupListeners(store.dispatch);

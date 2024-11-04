@@ -15,7 +15,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className="bg-background">
         <NextIntlClientProvider messages={messages}>
-            <RTKQueryProvider>{children}</RTKQueryProvider>
+          <RTKQueryProvider>{children}</RTKQueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

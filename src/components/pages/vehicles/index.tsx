@@ -1,4 +1,4 @@
-import VehiclesList from './ui/list';
+import VehiclesList from './ui/VehiclesList';
 import VehiclesHeader from './ui/headerList';
 
 const VehiclesPage = () => {

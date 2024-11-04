@@ -1,7 +1,7 @@
 import { IVehicle } from '@/lib/types/vehicle';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-interface VehicleResponse {
+export interface VehicleResponse {
   vehiclesWithOwnershipFlag: IVehicle[];
   totalPages: number;
 }
@@ -9,16 +9,31 @@ interface VehicleResponse {
 export const vehiclesApi = createApi({
   reducerPath: 'vehiclesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/vehicles',
+    baseUrl: 'http://localhost:3000/api',
   }),
   tagTypes: ['Vehicles'], // Определяем тип тега
   endpoints: (builder) => ({
+    getProfileVehicles: builder.query<
+      VehicleResponse,
+      { searchQuery: string; page: string; pageSize: string; id: string }
+    >({
+      query: ({ searchQuery, page, pageSize, id }) => ({
+        url: `/profile/${id}/vehicles`,
+        params: {
+          search: searchQuery, // Параметр поиска
+          page, // Параметр пагинации
+          limit: pageSize, // Количество элементов на странице
+        },
+      }),
+      transformResponse: (response: VehicleResponse) => response,
+      providesTags: ['Vehicles'], // Связываем этот запрос с тегом 'Vehicles'
+    }),
     getVehicles: builder.query<
       VehicleResponse,
       { searchQuery: string; page: string; pageSize: string }
     >({
       query: ({ searchQuery, page, pageSize }) => ({
-        url: '',
+        url: '/vehicles',
         params: {
           search: searchQuery, // Параметр поиска
           page, // Параметр пагинации
@@ -30,7 +45,7 @@ export const vehiclesApi = createApi({
     }),
     addVehicle: builder.mutation<IVehicle, FormData>({
       query: (newVehicle) => ({
-        url: '',
+        url: '/vehicles',
         method: 'POST',
         body: newVehicle,
         headers: {
@@ -40,7 +55,7 @@ export const vehiclesApi = createApi({
       invalidatesTags: ['Vehicles'], // Инвалидируем тег, чтобы обновить кеш
     }),
     getVehiclesCount: builder.query<number, void>({
-      query: () => '/count',
+      query: () => '/vehicles/count',
       providesTags: ['Vehicles'], // Инвалидируем тег при обновлении
     }),
     updateVehicle: builder.mutation<
@@ -48,7 +63,7 @@ export const vehiclesApi = createApi({
       { id: number; updatedVehicle: Partial<IVehicle> }
     >({
       query: ({ id, updatedVehicle }) => ({
-        url: `/${id}`,
+        url: `/vehicles/${id}`,
         method: 'PUT',
         body: updatedVehicle,
       }),
@@ -56,7 +71,7 @@ export const vehiclesApi = createApi({
     }),
     deleteVehicle: builder.mutation<void, number>({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/vehicles/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Vehicles'], // Инвалидируем тег при удалении
@@ -65,6 +80,7 @@ export const vehiclesApi = createApi({
 });
 
 export const {
+  useGetProfileVehiclesQuery,
   useGetVehiclesQuery,
   useAddVehicleMutation,
   useUpdateVehicleMutation,

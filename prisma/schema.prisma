@@ -47,7 +47,7 @@ model Cart {
   user      User     @relation(fields: [userId], references: [uuid])
   userId    String
   vehicle   Vehicle  @relation(fields: [vehicleId], references: [uuid])
-  vehicleId String
+  vehicleId String    @unique
   quantity  Int      @default(1) // Количество автомобилей в корзине
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

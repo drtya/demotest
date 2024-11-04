@@ -12,7 +12,7 @@
     "logout": "Logout"
   },
   "Actions": {
-    "pageSize":"Select cars per page:",
+    "pageSize": "Select cars per page:",
     "addVehicle": "Add vehicle",
     "cancel": "Cancel",
     "saveChange": "Save change"
@@ -42,7 +42,8 @@
     "logo": "Demo Test",
     "profile": "Profile",
     "vehicles": "Vehicles",
-    "setting": "Setting"
+    "setting": "Setting",
+    "myVehicles": "My Vehicles"
   },
   "Profile": {
     "profile": "Profile",

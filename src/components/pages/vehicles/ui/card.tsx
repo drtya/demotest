@@ -2,10 +2,11 @@ import { CardInfo } from '@/components/ui/cardInfoplate';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import React, { useCallback } from 'react';
-import FavoriteButton from './ui/favoriteButton';
-import CarCreator from './ui/myCarHover';
+import FavoriteButton from './favoriteButtons';
+import CarCreator from './myCarHover';
 
 interface IVehicleCard extends React.HTMLAttributes<HTMLDivElement> {
+  isFavorite?: boolean;
   isCreatedByUser?: boolean;
   image: string;
   settingsAction: Function;
@@ -13,11 +14,14 @@ interface IVehicleCard extends React.HTMLAttributes<HTMLDivElement> {
   description?: string;
   footer?: JSX.Element;
   position?: number;
+  vehicleUUID: string;
 }
 
 const VehicleCard = React.forwardRef<HTMLDivElement, IVehicleCard>(
   (
     {
+      vehicleUUID,
+      isFavorite,
       isCreatedByUser,
       className,
       footer,
@@ -44,7 +48,11 @@ const VehicleCard = React.forwardRef<HTMLDivElement, IVehicleCard>(
         >
           <EllipsisHorizontalIcon />
         </button>
-        {isCreatedByUser ? <CarCreator /> : <FavoriteButton />}
+        {isCreatedByUser ? (
+          <CarCreator />
+        ) : (
+          <FavoriteButton vehicleUUID={vehicleUUID} isFavorite={isFavorite} />
+        )}
         {position && (
           <CardInfo
             variant="position"

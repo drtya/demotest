@@ -47,6 +47,25 @@ const GeneratePageTitle = () => {
           <HeaderTitle text={MNav('setting')} />
         </Header>
       );
+    } else if (pathname.startsWith('/my-vehicles')) {
+      return (
+        <Header nav={
+          <HeaderNavbar
+            items={[
+              {
+                linkName: 'My Vehicles',
+                path: '/my-vehicles',
+              },
+              {
+                linkName: 'Favorites',
+                path: '/my-vehicles/favorites',
+              },
+            ]}
+          />
+        }>
+          <HeaderTitle text={MNav('myVehicles')} />
+        </Header>
+      );
     } else if (pathname.startsWith('/vehicles/new')) {
       return (
         <Header>
@@ -74,7 +93,9 @@ const GeneratePageTitle = () => {
           <div className="flex items-center gap-custom16">
             <HeaderTitle text={MNav('vehicles')} />
             {isLoading ? (
-              <CardInfo variant="amount" amount={0}>...</CardInfo>
+              <CardInfo variant="amount" amount={0}>
+                ...
+              </CardInfo>
             ) : (
               <CardInfo variant="amount" amount={vehiclesCount}>
                 {vehiclesCount}
