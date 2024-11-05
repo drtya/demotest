@@ -9,7 +9,7 @@ interface VehicleResponse {
 export const cartApi = createApi({
   reducerPath: 'cartApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api',
+    baseUrl: 'https://demotest-rho.vercel.app/api',
   }),
   tagTypes: ['Cart'],
   endpoints: (builder) => ({

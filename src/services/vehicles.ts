@@ -9,7 +9,7 @@ export interface VehicleResponse {
 export const vehiclesApi = createApi({
   reducerPath: 'vehiclesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api',
+    baseUrl: 'https://demotest-rho.vercel.app/api',
   }),
   tagTypes: ['Vehicles'], // Определяем тип тега
   endpoints: (builder) => ({
